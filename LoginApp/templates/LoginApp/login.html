@@ -1,0 +1,28 @@
+{% extends 'BaseApp/loginbase.html' %}
+
+{% block content %}
+
+
+   
+    <form action="" method="POST">{% csrf_token %}
+    
+        <div style="margin: 10px;">
+        <label for="usernane"><strong>Usuario</strong></label>
+        {{form.username}}
+        </div>
+        <div style="margin: 10px;">
+        <label for="password"><strong>Password</strong></label>
+        {{form.password}}
+        </div>    
+        <hr>
+        <div class="container" align="center">
+            <button type="submit" class="btn btn-success">Ingresar</button>
+            <button type="reset" class="btn btn-danger">Cancelar</button>
+        </div>
+
+   
+    </form>
+
+
+
+{% endblock %}
