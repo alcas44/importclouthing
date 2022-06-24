@@ -20,4 +20,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include("LoginApp.urls")),
     path('inicio/',include("InicioAdmin.urls")),
+
+
+    #Urls Asesores de Ventas
+    path('asesor/',include("InicioAsesor.urls")),
 ]

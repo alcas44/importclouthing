@@ -19,7 +19,7 @@ def login_in(request):
                        login(request,user)
                        request.session['member_id'] = user.id
                        return redirect('InicioAdmin')
-                   elif user.rol == 'ventas':
+                   elif user.rol == 'asesor':
                        login(request,user)
                        request.session['member_id'] = user.id
                        return redirect('InicioAsesor')
