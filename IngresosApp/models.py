@@ -1,4 +1,8 @@
+from email.policy import default
+from enum import unique
+from unicodedata import digit
 from django.db import models
+from django.forms import EmailField
 
 
 class Articulos(models.Model):
@@ -21,3 +25,32 @@ class Articulos(models.Model):
 
     def __str__(self):
         return self.codigo #como va a aparecer en el panel admin   
+
+
+
+
+
+
+# Modelo Cliente
+
+class Clientes(models.Model):
+    codigo=models.CharField(max_length=75,blank=False)
+    nit=models.CharField(max_length=14,blank=False)
+    tipo=models.CharField(max_length=50,blank=False)
+    nombres=models.CharField(max_length=200,blank=False)
+    apellidos=models.CharField(max_length=200,blank=False)
+    direccion=models.CharField(max_length=500,blank=False)
+    telefono=models.CharField(max_length=9,blank=False)
+    correo=models.CharField(max_length=250,blank=True)
+    fecha_nac=models.DateField(blank=True)
+    cuenta=models.FloatField()
+    usuario=models.CharField(max_length=200,blank=False)
+    created=models.DateTimeField(auto_now_add=True)
+    updated=models.DateTimeField(auto_now_add=True)
+
+    class Meta:#nombre que tendran en singular y plural
+        verbose_name="cliente"
+        verbose_name_plural="clientes"
+
+    def __str__(self):
+        return self.nit #como va a aparecer en el panel admin   
