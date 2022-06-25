@@ -15,13 +15,17 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
+from django.conf import settings#para agregar la ruta de la imagen 
+from django.conf.urls.static import static#para agregar la ruta de la imagen 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include("LoginApp.urls")),
     path('inicio/',include("InicioAdmin.urls")),
+    path('ingresos/',include("IngresosApp.urls")),
 
 
     #Urls Asesores de Ventas
     path('asesor/',include("InicioAsesor.urls")),
 ]
+urlpatterns+=static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

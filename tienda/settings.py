@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'InicioAdmin',
     'user',
     'InicioAsesor',
+    'IngresosApp',
 ]
 
 MIDDLEWARE = [
@@ -134,6 +135,15 @@ MEDIA_ROOT=os.path.join(BASE_DIR,'media')
 LOGIN_URL = 'Login'
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
+
+#configuracion de envios de correos
+
+#EMAIL_BACKEND="django.core.mail.backends.smtp.EmailBackend"
+#EMAIL_HOST="smtp.gmail.com"
+#EMAIL_USE_TLS=True
+#EMAIL_PORT=587
+#EMAIL_HOST_USER=""
+#EMAIL_HOST_PASSWORD=""
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'user.User'
