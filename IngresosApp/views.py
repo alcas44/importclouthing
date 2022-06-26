@@ -23,11 +23,11 @@ def nuevoarticulo(request):
                 data.descuento = form.cleaned_data['descuento']
                 data.existencia = form.cleaned_data['existencia']
                 data.imagen = form.cleaned_data['imagen']
-                data.usuario = form.cleaned_data['user']
+                data.usuario = request.user
                 data.created = datetime.today()
                 data.updated = datetime.today()
                 data.save()
-                return redirect('Nuevo')
+                return redirect('NuevoArt')
               except:
                 return redirect('/')
                 

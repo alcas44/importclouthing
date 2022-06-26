@@ -15,62 +15,7 @@
         <form method="POST" enctype="multipart/form-data">{% csrf_token %}
             <div class="container overflow-hidden">
                 <h3>Ingreso de Nuevo Articulo</h3><hr><br>
-                <div class="row gy-5">
-                  <div class="col-6">
-                    <label for="">Codigo Articulo</label>
-                    {{form.codigo}}
-                    <br>
-                  </div>
-                  <div class="col-6">
-                    <label for="">Referencia Articulo</label>
-                    {{form.referencia}}
-                    <br>
-                  </div>
-                  
-                  <div class="col-6">
-                    <label for="">Descripcion Articulo</label>
-                    {{form.descripcion}}
-                    <br>
-                  </div>
-                  <div class="col-6">
-                    <label for="">Marca Articulo</label>
-                    {{form.marca}}
-                    <br>
-                  </div>
-            
-                  <div class="col-6">
-                    <label for="">Precio Compra Articulo</label>
-                    {{form.precio_compra}}
-                    <br>
-                  </div>
-                  <div class="col-6">
-                    <label for="">Precio Venta Articulo</label>
-                    {{form.precio_venta}}
-                    <br>
-                  </div>
-
-                  <div class="col-6">
-                    <label for="">Descuento Articulo</label>
-                    {{form.precio_compra}}
-                    <br>
-                  </div>
-                  <div class="col-6">
-                    <label for="">Existencia Articulo</label>
-                    {{form.precio_venta}}
-                    <br>
-                  </div>
-
-                  <div class="col-6">
-                    <label for="">Imagen Articulo</label>
-                    {{form.imagen}}
-                    <br>
-                  </div>
-                  <div class="col-6">
-                    <label for="">Usuario</label>
-                    <input type="text" class="form-control" name="user" readonly required value="{{user.username}}">
-                    <br>
-                  </div>
-
+                {{form.as_p}}
                 </div>
               </div>
              <div class="container" align="center">
