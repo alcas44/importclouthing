@@ -1,5 +1,5 @@
 from django import forms
-from .models import Articulos,Clientes
+from .models import Articulos,Clientes,Envios
 
 
 class ArticulosForm(forms.ModelForm):
@@ -42,3 +42,31 @@ class ClientesForm(forms.ModelForm):
             'cuenta': forms.TextInput(attrs={'class': 'form-control','placeholder':'Q.0.00','readonly':True,'default':0.00}),        
         }
         
+
+
+
+
+
+TIPO_PAGO = [('','Elija Opcion de Envio'),('Pagado','Pagado'),('Pago Contra Entrega','Pago Contra Entrega')]
+ESTADO = [('','Elija Estado del Envio'),('En Espera','En Espera de Envio'),('Enviado','Enviado'),('Cancelado','Cancelado')]
+
+class EnviosForm(forms.ModelForm):
+    
+
+    class Meta:
+        model = Envios
+        fields = ['codigo','tipo','remitente','destinatario','direccion','telefono','estado','monto','guia','observacion']
+
+        widgets = { 
+            'codigo': forms.TextInput(attrs={'class': 'form-control','placeholder':'Codigo Envio','autofocus': True,'require':True}),
+            'tipo': forms.Select(attrs={'class':'form-control'},choices=TIPO_PAGO),
+            'remitente': forms.TextInput(attrs={'class': 'form-control','placeholder':'Remitente','require':True}),
+            'destinatario': forms.TextInput(attrs={'class': 'form-control','placeholder':'Destinatario','require':True}), 
+            'direccion': forms.TextInput(attrs={'class': 'form-control','placeholder':'Direccion','require':True}),
+            'telefono': forms.TextInput(attrs={'class': 'form-control','placeholder':'Telefono'}), 
+            'estado': forms.Select(attrs={'class':'form-control'},choices=ESTADO),
+            'monto': forms.TextInput(attrs={'class': 'form-control','placeholder':'Q.0.00','required':True}),
+            'guia': forms.TextInput(attrs={'class': 'form-control','placeholder':'Guia de Envio Para Rastreo'}), 
+            'observacion': forms.TextInput(attrs={'class': 'form-control','placeholder':'Observaciones o Detalles de Entrega'}),        
+        }
+                

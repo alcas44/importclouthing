@@ -54,3 +54,31 @@ class Clientes(models.Model):
 
     def __str__(self):
         return self.nit #como va a aparecer en el panel admin   
+
+
+
+
+
+# Modelo Envios
+
+class Envios(models.Model):
+    codigo=models.CharField(max_length=75,blank=False)
+    tipo=models.CharField(max_length=200,blank=False)
+    remitente=models.CharField(max_length=200,blank=False)
+    destinatario=models.CharField(max_length=200,blank=False)
+    direccion=models.CharField(max_length=500,blank=False)
+    telefono=models.CharField(max_length=9,blank=False)
+    estado=models.CharField(max_length=75,blank=False)
+    monto=models.FloatField(blank=True)
+    guia=models.CharField(max_length=100,blank=True)
+    observacion=models.CharField(max_length=500,blank=True)
+    usuario=models.CharField(max_length=200,blank=False)
+    created=models.DateTimeField(auto_now_add=True)
+    updated=models.DateTimeField(auto_now_add=True)
+
+    class Meta:#nombre que tendran en singular y plural
+        verbose_name="envios"
+        verbose_name_plural="envios"
+
+    def __str__(self):
+        return self.codigo #como va a aparecer en el panel admin   

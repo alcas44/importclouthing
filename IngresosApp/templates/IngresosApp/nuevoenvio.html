@@ -1,68 +1,67 @@
 {% extends 'BaseApp/base.html' %}
 {% load static %}
 
-
 {% block content %}
-
-{% if messages %}
-          <ul class="messages">
-          {% for message in messages %}
-          <li> i{% if message.tags %} class="text-success text-center {{ message.tags }}"{% endif %}>{{ message }}</li>
-          {% endfor %}
-{% endif %}   
 <div class="pd-ltr-20">
     <div class="card-box pd-20 height-100-p mb-30">
-        <form method="POST" enctype="multipart/form-data">{% csrf_token %}
+        <form method="POST">
+            {% csrf_token %}
             <div class="container overflow-hidden">
-                <h3>Ingreso de Nuevo Articulo</h3><hr><br>
+                <h3>Ingreso de Nuevo Envio</h3><hr><br>
                 <div class="row gy-5">
                   <div class="col-6">
-                    <label for="">Codigo Articulo</label>
+                    <label for="">Codigo Envio</label>
                     {{form.codigo}}
                     <br>
                   </div>
                   <div class="col-6">
-                    <label for="">Referencia Articulo</label>
-                    {{form.referencia}}
+                    <label for="">Tipo de Envio
+                    {{form.tipo}}
                     <br>
                   </div>
                   
                   <div class="col-6">
-                    <label for="">Descripcion Articulo</label>
-                    {{form.descripcion}}
+                    <label for="">Remitente</label>
+                    {{form.remitente}}
                     <br>
                   </div>
                   <div class="col-6">
-                    <label for="">Marca Articulo</label>
-                    {{form.marca}}
+                    <label for="">Destinatario</label>
+                    {{form.destinatario}}
                     <br>
                   </div>
             
                   <div class="col-6">
-                    <label for="">Precio Compra Articulo</label>
-                    {{form.precio_compra}}
+                    <label for="">Direccion del Envio</label>
+                    {{form.direccion}}
                     <br>
                   </div>
                   <div class="col-6">
-                    <label for="">Precio Venta Articulo</label>
-                    {{form.precio_venta}}
-                    <br>
-                  </div>
-
-                  <div class="col-6">
-                    <label for="">Descuento Articulo</label>
-                    {{form.precio_compra}}
-                    <br>
-                  </div>
-                  <div class="col-6">
-                    <label for="">Existencia Articulo</label>
-                    {{form.precio_venta}}
+                    <label for="">Telefono de Contacto</label>
+                    {{form.telefono}}
                     <br>
                   </div>
 
                   <div class="col-6">
-                    <label for="">Imagen Articulo</label>
-                    {{form.imagen}}
+                    <label for="">Estado del Envio</label>
+                    {{form.estado}}
+                    <br>
+                  </div>
+
+                  <div class="col-6">
+                    <label for="">Monto del Envio</label>
+                    {{form.monto}}
+                    <br>
+                  </div>
+
+                  <div class="col-6">
+                    <label for="">Guia de Rastreo</label>
+                    {{form.guia}}
+                    <br>
+                  </div>
+                  <div class="col-6">
+                    <label for="">Observaciones del Envio</label>
+                    {{form.observacion}}
                     <br>
                   </div>
                   <div class="col-6">
