@@ -4,73 +4,18 @@
 {% block content %}
 <div class="pd-ltr-20">
     <div class="card-box pd-20 height-100-p mb-30">
-        <form method="POST">
-            {% csrf_token %}
+        <form method="POST" enctype="multipart/form-data">{% csrf_token %}
             <div class="container overflow-hidden">
                 <h3>Ingreso de Nuevo Cliente</h3><hr><br>
                 <div class="row gy-5">
-                  <div class="col-6">
-                    <label for="">Codigo Cliente</label>
-                    {{form.codigo}}
-                    <br>
-                  </div>
-                  <div class="col-6">
-                    <label for="">Nit Cliente
-                    {{form.nit}}
-                    <br>
-                  </div>
-                  
-                  <div class="col-6">
-                    <label for="">Tipo Cliente</label>
-                    {{form.tipo}}
-                    <br>
-                  </div>
-                  <div class="col-6">
-                    <label for="">Nombres Cliente</label>
-                    {{form.nombres}}
-                    <br>
-                  </div>
-            
-                  <div class="col-6">
-                    <label for="">Apellidos Cliente</label>
-                    {{form.apellidos}}
-                    <br>
-                  </div>
-                  <div class="col-6">
-                    <label for="">Direccion Cliente</label>
-                    {{form.direccion}}
-                    <br>
-                  </div>
-
-                  <div class="col-6">
-                    <label for="">Telefono Cliente</label>
-                    {{form.telefono}}
-                    <br>
-                  </div>
-
-                  <div class="col-6">
-                    <label for="">Fecha Nacimiento Cliente</label>
-                    {{form.fecha_nac}}
-                    <br>
-                  </div>
-                  <div class="col-6">
-                    <label for="">Cuenta Corriente Cliente</label>
-                    {{form.cuenta}}
-                    <br>
-                  </div>
-                  <div class="col-6">
-                    <label for="">Usuario</label>
-                    <input type="text" class="form-control" name="user" readonly required value="{{user.username}}">
-                    <br>
-                  </div>
-
+                  {{form.as_p}}
                 </div>
               </div>
              <div class="container" align="center">
                 <button class="btn btn-success" type="submit">Ingresar</button>
                 <button class="btn btn-danger" type="reset">Cancelar</button>
              </div>
-
+             
         </form>
     </div>
     

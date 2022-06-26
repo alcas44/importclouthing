@@ -36,11 +36,64 @@ def nuevoarticulo(request):
 
    
 def nuevocliente(request):
-    form = ClientesForm()
-    return render(request,"IngresosApp/nuevocliente.html",{'form':form})
+    if not request.user.is_authenticated and not request.user.is_active:
+        redirect('/')
+    else:    
+        form = ClientesForm()
+        if request.method == "POST":
+            form = ClientesForm(request.POST)
+            if form.is_valid():
+              try:
+                data = Clientes()
+                data.codigo = form.cleaned_data['codigo']
+                data.nit = form.cleaned_data['nit']
+                data.tipo = form.cleaned_data['tipo']
+                data.nombres = form.cleaned_data['nombres']
+                data.apellidos = form.cleaned_data['apellidos']
+                data.direccion = form.cleaned_data['direccion']
+                data.telefono = form.cleaned_data['telefono']
+                data.correo = form.cleaned_data['correo']
+                data.fecha_nac = form.cleaned_data['fecha_nac']
+                data.cuenta = 0.00
+                data.usuario =  request.user
+                data.created = datetime.today()
+                data.updated = datetime.today()
+                data.save()
+                return redirect('NuevoCliente')
+              except:
+                m=messages.info(request,"No ha completado la informacion")
+                return render(request,"IngresosApp/nuevocliente.html",{'form':form})
+                
+        return render(request,"IngresosApp/nuevocliente.html",{'form':form})
 
 
 
 def nuevoenvio(request):
-    form = EnviosForm()
-    return render(request,"IngresosApp/nuevoenvio.html",{'form':form})
+     if not request.user.is_authenticated and not request.user.is_active:
+        redirect('/')
+     else:    
+        form = EnviosForm()
+        if request.method == "POST":
+            form = EnviosForm(request.POST)
+            if form.is_valid():
+              try:
+                data = Envios()
+                data.codigo = form.cleaned_data["codigo"]
+                data.tipo = form.cleaned_data["tipo"]
+                data.remitente = form.cleaned_data["remitente"]
+                data.destinatario = form.cleaned_data["destinatario"]
+                data.direccion = form.cleaned_data["direccion"]
+                data.telefono = form.cleaned_data["telefono"]
+                data.estado = form.cleaned_data["estado"]
+                data.monto = form.cleaned_data["monto"]
+                data.guia = form.cleaned_data["guia"]
+                data.observacion = form.cleaned_data["observacion"]
+                data.usuario = request.user
+                data.created = datetime.today()
+                data.updated = datetime.today()
+                data.save()                
+                return redirect('NuevoEnvio')
+              except:
+                return render(request,"IngresosApp/nuevoenvio.html",{'form':form})
+                
+        return render(request,"IngresosApp/nuevoenvio.html",{'form':form})

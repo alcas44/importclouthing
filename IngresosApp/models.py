@@ -68,6 +68,7 @@ class Envios(models.Model):
     destinatario=models.CharField(max_length=200,blank=False)
     direccion=models.CharField(max_length=500,blank=False)
     telefono=models.CharField(max_length=9,blank=False)
+    venta=models.CharField(max_length=100,blank=False)
     estado=models.CharField(max_length=75,blank=False)
     monto=models.FloatField(blank=True)
     guia=models.CharField(max_length=100,blank=True)

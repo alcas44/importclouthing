@@ -15,7 +15,8 @@ class ArticulosForm(forms.ModelForm):
             'precio_compra': forms.TextInput(attrs={'class': 'form-control','placeholder':'Precio Compra','require':True}),
             'precio_venta': forms.TextInput(attrs={'class': 'form-control','placeholder':'Precio Venta','require':True}),
             'descuento': forms.TextInput(attrs={'class': 'form-control','placeholder':'Descuento'}),
-            'existencia': forms.TextInput(attrs={'class': 'form-control','placeholder':'Existencia','require':True}),        
+            'existencia': forms.TextInput(attrs={'class': 'form-control','placeholder':'Existencia','require':True}),
+            'imagen': forms.FileInput(attrs={'class': 'form-control','require':False}),        
         }
 
 
@@ -27,19 +28,18 @@ class ClientesForm(forms.ModelForm):
 
     class Meta:
         model = Clientes
-        fields = ['codigo', 'nit','tipo', 'nombres','apellidos','direccion','telefono','correo','fecha_nac','cuenta','usuario']
+        fields = ['codigo','nit','tipo', 'nombres','apellidos','direccion','telefono','correo','fecha_nac']
 
         widgets = { 
-            'codigo': forms.TextInput(attrs={'class': 'form-control','placeholder':'Codigo','autofocus': True,'require':True}),
-            'nit': forms.TextInput(attrs={'class': 'form-control','placeholder':'Nit','require':True}),
-            'tipo': forms.Select(attrs={'class':'form-control'},choices=TIPO),
+            'codigo': forms.TextInput(attrs={'class': 'form-control','placeholder':'Codigo','autofocus': True}),
+            'nit': forms.TextInput(attrs={'class': 'form-control','placeholder':'Nit'}),
+            'tipo': forms.Select(attrs={'class':'form-control','require':True},choices=TIPO),
             'nombres': forms.TextInput(attrs={'class': 'form-control','placeholder':'Nombre','require':True}), 
             'apellidos': forms.TextInput(attrs={'class': 'form-control','placeholder':'Apellidos','require':True}),
             'direccion': forms.TextInput(attrs={'class': 'form-control','placeholder':'Direccion','require':True}),
             'telefono': forms.TextInput(attrs={'class': 'form-control','placeholder':'Telefono'}),
-            'correo': forms.TextInput(attrs={'class': 'form-control','placeholder':'Correo Electronico'}),
-            'fecha_nac': forms.DateInput(attrs={'class': 'form-control','type':'date'}),
-            'cuenta': forms.TextInput(attrs={'class': 'form-control','placeholder':'Q.0.00','readonly':True,'default':0.00}),        
+            'correo': forms.TextInput(attrs={'class': 'form-control','placeholder':'Correo Electronico','require':True}),
+            'fecha_nac': forms.DateInput(attrs={'class': 'form-control','type':'date'}),       
         }
         
 
@@ -55,15 +55,16 @@ class EnviosForm(forms.ModelForm):
 
     class Meta:
         model = Envios
-        fields = ['codigo','tipo','remitente','destinatario','direccion','telefono','estado','monto','guia','observacion']
+        fields = ['codigo','tipo','remitente','destinatario','direccion','telefono','estado','monto','guia','observacion','venta']
 
         widgets = { 
-            'codigo': forms.TextInput(attrs={'class': 'form-control','placeholder':'Codigo Envio','autofocus': True,'require':True}),
+            'codigo': forms.TextInput(attrs={'class': 'form-control','placeholder':'Codigo Envio','name':'codigo','autofocus': True,'require':True}),
             'tipo': forms.Select(attrs={'class':'form-control'},choices=TIPO_PAGO),
             'remitente': forms.TextInput(attrs={'class': 'form-control','placeholder':'Remitente','require':True}),
             'destinatario': forms.TextInput(attrs={'class': 'form-control','placeholder':'Destinatario','require':True}), 
             'direccion': forms.TextInput(attrs={'class': 'form-control','placeholder':'Direccion','require':True}),
-            'telefono': forms.TextInput(attrs={'class': 'form-control','placeholder':'Telefono'}), 
+            'telefono': forms.TextInput(attrs={'class': 'form-control','placeholder':'Telefono'}),
+            'venta': forms.TextInput(attrs={'class': 'form-control','placeholder':'Numero de Venta','require':True}), 
             'estado': forms.Select(attrs={'class':'form-control'},choices=ESTADO),
             'monto': forms.TextInput(attrs={'class': 'form-control','placeholder':'Q.0.00','required':True}),
             'guia': forms.TextInput(attrs={'class': 'form-control','placeholder':'Guia de Envio Para Rastreo'}), 
