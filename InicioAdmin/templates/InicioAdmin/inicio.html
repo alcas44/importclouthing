@@ -28,9 +28,9 @@
                     </div>
                     <div class="widget-data">
                         <div class="h4 mb-0">
-                            {{ conteo }}
+                            {{ articulos }}
                         </div>
-                        {% if conteo == 1 %}
+                        {% if articulos == 1 %}
                         <div class="weight-600 font-14">Articulo</div>
                         {% else %}
                         <div class="weight-600 font-14">Articulos</div>
@@ -59,8 +59,14 @@
                         <img src="https://img.icons8.com/fluency/96/000000/group.png"/>
                     </div>
                     <div class="widget-data">
-                        <div class="h4 mb-0">350</div>
+                        <div class="h4 mb-0">
+                            {{ clientes }}
+                        </div>
+                        {% if clientes == 1 %}
+                        <div class="weight-600 font-14">Cliente</div>
+                        {% else %}
                         <div class="weight-600 font-14">Clientes</div>
+                        {% endif %}
                     </div>
                 </div>
             </div>

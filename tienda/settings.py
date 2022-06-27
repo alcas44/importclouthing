@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'user',
     'InicioAsesor',
     'IngresosApp',
+    'HistorialApp',
 ]
 
 MIDDLEWARE = [

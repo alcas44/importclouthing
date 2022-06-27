@@ -23,6 +23,7 @@ urlpatterns = [
     path('',include("LoginApp.urls")),
     path('inicio/',include("InicioAdmin.urls")),
     path('ingresos/',include("IngresosApp.urls")),
+    path('historial/',include("HistorialApp.urls")),
 
 
     #Urls Asesores de Ventas
