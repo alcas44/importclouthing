@@ -1,8 +1,9 @@
+import random
 from django import forms
-from .models import Articulos,Clientes,Envios
-
+from .models import Articulos,Clientes,Envios 
 
 class ArticulosForm(forms.ModelForm):
+   
     class Meta:
         model = Articulos
         fields = ['codigo', 'referencia','descripcion', 'marca','precio_compra','precio_venta','descuento','existencia','imagen']
@@ -55,7 +56,7 @@ class EnviosForm(forms.ModelForm):
 
     class Meta:
         model = Envios
-        fields = ['codigo','tipo','remitente','destinatario','direccion','telefono','estado','monto','guia','observacion','venta']
+        fields = ['codigo','tipo','remitente','destinatario','direccion','telefono','venta','estado','monto','guia','observacion']
 
         widgets = { 
             'codigo': forms.TextInput(attrs={'class': 'form-control','placeholder':'Codigo Envio','name':'codigo','autofocus': True,'require':True}),

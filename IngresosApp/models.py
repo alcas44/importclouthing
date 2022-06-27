@@ -6,7 +6,7 @@ from django.forms import EmailField
 
 
 class Articulos(models.Model):
-    codigo=models.CharField(max_length=75,blank=False)
+    codigo=models.CharField(max_length=75)
     referencia=models.CharField(max_length=200,blank=False)
     descripcion=models.CharField(max_length=200,blank=False)
     marca=models.CharField(max_length=200,blank=False)
@@ -34,7 +34,7 @@ class Articulos(models.Model):
 # Modelo Cliente
 
 class Clientes(models.Model):
-    codigo=models.CharField(max_length=75,blank=False)
+    codigo=models.CharField(max_length=75)
     nit=models.CharField(max_length=14,blank=False)
     tipo=models.CharField(max_length=50,blank=False)
     nombres=models.CharField(max_length=200,blank=False)
@@ -62,7 +62,7 @@ class Clientes(models.Model):
 # Modelo Envios
 
 class Envios(models.Model):
-    codigo=models.CharField(max_length=75,blank=False)
+    codigo=models.CharField(max_length=75)
     tipo=models.CharField(max_length=200,blank=False)
     remitente=models.CharField(max_length=200,blank=False)
     destinatario=models.CharField(max_length=200,blank=False)
