@@ -23,10 +23,10 @@ def nuevoarticulo(request):
                     data.codigo = form.cleaned_data['codigo']
                     data.referencia = form.cleaned_data['referencia']
                     data.descripcion = form.cleaned_data['descripcion']
+                    data.color = form.cleaned_data['color']
                     data.marca = form.cleaned_data['marca']
                     data.precio_compra = form.cleaned_data['precio_compra']
                     data.precio_venta = form.cleaned_data['precio_venta']
-                    data.descuento = form.cleaned_data['descuento']
                     data.existencia = form.cleaned_data['existencia']
                     data.imagen = form.cleaned_data['imagen']
                     data.usuario = request.user
@@ -51,21 +51,20 @@ def nuevocliente(request):
             form = ClientesForm(request.POST)
             if form.is_valid():
               try:
-                ver = Clientes.objects.filter(codigo=request.POST['codigo'])
+                ver = Clientes.objects.filter(nit=request.POST['nit'])
                 if(ver):
                     messages.error(request, 'Este Cliente Ya Existe.')
                     return redirect('NuevoCliente')
                 else:
                   data = Clientes()
-                  data.codigo = form.cleaned_data['codigo']
                   data.nit = form.cleaned_data['nit']
-                  data.tipo = form.cleaned_data['tipo']
+                  data.negocio = form.cleaned_data['negocio']
                   data.nombres = form.cleaned_data['nombres']
                   data.apellidos = form.cleaned_data['apellidos']
                   data.direccion = form.cleaned_data['direccion']
                   data.telefono = form.cleaned_data['telefono']
+                  data.telefono2 = form.cleaned_data['telefono2']
                   data.correo = form.cleaned_data['correo']
-                  data.fecha_nac = form.cleaned_data['fecha_nac']
                   data.cuenta = 0.00
                   data.usuario =  request.user
                   data.created = datetime.today()
