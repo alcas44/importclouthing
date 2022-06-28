@@ -4,5 +4,46 @@
 {% block content %}
 
 
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12">
+                        <div class="title">
+                            <h4>Inventarios de Articulos</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="product-wrap">
+                <div class="product-list">
+                    <ul class="row">
+                        {% for inventario in inventario %}
+                        <li class="col-lg-4 col-md-6 col-sm-12">
+                            <div class="product-box">
+                                <div class="producct-img"><img src="{{ inventario.imagen.url }}" alt=""></div>
+                                <div class="product-caption">
+                                    <h4><a href="#">{{ inventario.descripcion }}</a></h4>
+                                    <div class="price">
+                                        <ins>Codigo: <a href="#" class="text-danger">{{ inventario.codigo }}</a></ins>
+                                    </div>
+                                    <div class="price">
+                                        <ins>Referencia: <a href="#" class="text-danger">{{ inventario.referencia }}</a></ins>
+                                    </div>
+                                    <div class="price">
+                                        <ins>Precio:<a href="#" class="text-danger"> Q.{{ inventario.precio_venta }}</a></ins>
+                                        <ins>Existencia:<a href="#" class="text-danger"> {{ inventario.existencia }}</a></ins>
+                                    </div>
+                                    <a href="#" class="btn btn-outline-primary">Detalles</a>
+                                </div>
+                            </div>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
 {% endblock %}
