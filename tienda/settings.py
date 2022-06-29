@@ -44,8 +44,8 @@ INSTALLED_APPS = [
     'user',
     'InicioAsesor',
     'IngresosApp',
-    'HistorialApp',
-    'ActualizarApp',
+    'InventariosApp',
+    'VerApp',
 ]
 
 MIDDLEWARE = [

@@ -36,6 +36,7 @@ def nuevoarticulo(request):
                     messages.success(request, 'Articulo Ingresado Exitosamente!.')
                     return redirect('NuevoArt')  
                 except:
+                   messages.error(request, 'Error al Ingresar Articulo !')
                    return render(request,"IngresosApp/nuevoart.html",{'form':form})      
         
         return render(request,"IngresosApp/nuevoart.html",{'form':form})

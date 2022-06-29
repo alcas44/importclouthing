@@ -1,6 +1,6 @@
-import random
 from django import forms
-from .models import Articulos,Clientes,Envios 
+from .models import Articulos,Clientes,Envios
+
 
 class ArticulosForm(forms.ModelForm):
    
