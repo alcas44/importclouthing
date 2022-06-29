@@ -29,7 +29,8 @@
                     <td>{{ inventario.descripcion }}</td>
                     <td>{{ inventario.color }}</td>
                     <td>{{ inventario.existencia }}</td>
-                    <td><img src="{{ inventario.imagen.url }}" alt="" width="50"></td>
+                    <td>
+                        <img src="{{ inventario.imagen.url }}" alt="" width="50"></td>
                     <td>
                         <div class="dropdown">
                             <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
@@ -47,6 +48,7 @@
             </tbody>
         </table>
     </div>
+
 </div>
 
 <script >
@@ -74,6 +76,7 @@
     // ingresa texto en la entrada
     document.getElementById("filtrar").addEventListener("keyup", filtro);
     </script>
+
 
 
 {% endblock %}
