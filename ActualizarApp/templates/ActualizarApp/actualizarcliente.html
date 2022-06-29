@@ -1,0 +1,83 @@
+{% extends 'BaseApp/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="pd-20 card-box mb-30">
+    <div class="clearfix">
+        <div class="pull-left">
+            {% for detalle in form %} <h4 class="text-info">Nit Cliente: </h4><h3 class="text-danger">{{ detalle.nit }}</h3> 
+            <p class="mb-5">Negocio de Cliente: <strong>{{ detalle.negocio }}</strong></p>
+            {% endfor %}
+        </div>
+        <div class="pull-right">
+            <button class="btn btn-primary btn-sm scroll-click" rel="content-y" onclick="javascript:window.print()"  data-toggle="collapse" role="button"><i class="fa fa-print"></i> Imprimir</button>
+            <a href="{% url 'ActualizarCliente' %}" class="btn btn-success">Regresar</a>
+        </div>
+    </div>
+    <form>
+        {% for detalle in form %}
+        <div class="row">
+            <div class="col-md-4 col-sm-12">
+                <div class="form-group">
+                    <label>Nit de Cliente</label>
+                    <input type="text" class="form-control" value="{{ detalle.nit }}">
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-12">
+                <div class="form-group">
+                    <label>Negocio de Cliente</label>
+                    <input type="text" class="form-control" value="{{ detalle.negocio }}">
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-12">
+                <div class="form-group">
+                    <label>Nombres y Apellidos Cliente</label>
+                    <input type="text" class="form-control" value="{{ detalle.nombres }} {{ detalle.apellidos }}">
+                </div>
+            </div>
+        </div>  
+        
+        <div class="row">
+            <div class="col-md-4 col-sm-12">
+                <div class="form-group">
+                    <label>Direccion de Cliente</label>
+                    <input type="text" class="form-control" value="{{ detalle.direccion }}">
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-12">
+                <div class="form-group">
+                    <label>Telefono</label>
+                    <input type="text" class="form-control" value="{{ detalle.telefono }}">
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-12">
+                <div class="form-group">
+                    <label>Telefono 2</label>
+                    <input type="text" class="form-control" value="{{ detalle.telefono2}}">
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4 col-sm-12">
+                <div class="form-group">
+                    <label>Correo Electronico del Cliente</label>
+                    <input type="text" class="form-control" value="{{ detalle.correo }}">
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-12">
+                <div class="form-group">
+                    <label>Total Compra de Cliente</label>
+                    <input type="text" class="form-control" value="{{ detalle.cuenta }}">
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        <div class="container" align="center">
+            <button type="submit" class="btn btn-primary">Modificar</button>
+            <button type="reset" class="btn btn-danger">Cancelar</button>
+        </div>
+    </form>
+  
+</div>
+{% endblock %}

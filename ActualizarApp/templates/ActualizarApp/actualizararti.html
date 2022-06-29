@@ -1,0 +1,91 @@
+{% extends 'BaseApp/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="pd-20 card-box mb-30">
+    <div class="clearfix">
+        <div class="pull-left">
+            {% for detalle in form %} <h4 class="text-info">Codigo Articulos: </h4><h3 class="text-danger">{{ detalle.codigo }}</h3> 
+            <p class="mb-5">Nombre de Articulo: <strong>{{ detalle.descripcion }}</strong></p>
+            <p class="mb-5">Referencia de Articulo: <strong>{{ detalle.referencia }} </strong></p>
+            <p class="mb-30">Ultimo Ingreso de Articulo: <strong>{{ detalle.updated|date:"d/m/Y" }}</strong></p>
+            {% endfor %}
+        </div>
+        <div class="pull-right">
+            <button class="btn btn-primary btn-sm scroll-click" rel="content-y" onclick="javascript:window.print()"  data-toggle="collapse" role="button"><i class="fa fa-print"></i> Imprimir</button>
+            <a href="{% url 'InventarioArticulos' %}" class="btn btn-success">Regresar</a>
+        </div>
+    </div>
+    <form>
+        {% for detalle in form %}
+        <div class="row">
+            <div class="col-md-4 col-sm-12">
+                <div class="form-group">
+                    <label>Codigo de Articulo</label>
+                    <input type="text" class="form-control" value="{{ detalle.codigo }}">
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-12">
+                <div class="form-group">
+                    <label>Referencia de Articulo</label>
+                    <input type="text" class="form-control" value="{{ detalle.referencia }}">
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-12">
+                <div class="form-group">
+                    <label>Descripcion de Articulos</label>
+                    <input type="text" class="form-control" value="{{ detalle.descripcion }}">
+                </div>
+            </div>
+        </div>  
+        
+        <div class="row">
+            <div class="col-md-4 col-sm-12">
+                <div class="form-group">
+                    <label>Color de Articulo</label>
+                    <input type="text" class="form-control" value="{{ detalle.color }}">
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-12">
+                <div class="form-group">
+                    <label>Marca de Articulo</label>
+                    <input type="text" class="form-control" value="{{ detalle.marca }}">
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-12">
+                <div class="form-group">
+                    <label>Precio Compra Articulo</label>
+                    <input type="text" class="form-control" value="{{ detalle.precio_compra }}">
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4 col-sm-12">
+                <div class="form-group">
+                    <label>Precio Venta Articulo</label>
+                    <input type="text" class="form-control" value="{{ detalle.precio_venta }}">
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-12">
+                <div class="form-group">
+                    <label>Existencia de Articulo</label>
+                    <input type="text" class="form-control" value="{{ detalle.existencia }}">
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-12">
+                <div class="form-group">
+                    <label>Imagen de Articulo</label>
+                    <img src="{{ detalle.imagen.url }}" style="height: 175px;"/>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        <div class="container" align="center">
+            <button type="submit" class="btn btn-primary">Modificar</button>
+            <button type="reset" class="btn btn-danger">Cancelar</button>
+        </div>
+    </form>
+  
+</div>
+{% endblock %}

@@ -23,19 +23,16 @@ def login_in(request):
                        login(request,user)
                        request.session['member_id'] = user.id
                        return redirect('InicioAsesor')
-
-
                else:
                     return redirect('/')
-
             else:
-                messages.info(request,'Credenciales Erroneas')
                 return redirect('/')
 
 
     form = AuthenticationForm()
     return render(request,'LoginApp/login.html',{'form':form})
    except AttributeError:
+       messages.error(request, 'Credenciales Invalidas')
        return redirect('/')
        
 
