@@ -53,7 +53,7 @@
                             <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
                                 <a class="dropdown-item" href="{% url 'VerCliente' inventario.nit %}"><i class="dw dw-eye"></i> Ver</a>
                                 <a class="dropdown-item" href="{% url 'UpdateCliente' inventario.nit %}"><i class="dw dw-edit2"></i> Editar</a>
-                                <a class="dropdown-item" href="#"><i class="dw dw-delete-3"></i> Borrar</a>
+                                <a class="dropdown-item" href="{% url 'DeleteCliente' inventario.nit %}"><i class="dw dw-delete-3"></i> Borrar</a>
                             </div>
                         </div>
                     </td>

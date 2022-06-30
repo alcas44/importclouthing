@@ -1,0 +1,25 @@
+{% extends 'BaseApp/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="pd-ltr-20">
+    <div class="card-box pd-20 height-100-p mb-30">
+        <form action="" method="POST" enctype="multipart/form-data">{% csrf_token %}
+            <div class="container overflow-hidden">
+                <h3>Eliminar de Cliente</h3><hr><br>
+                <div class="row gy-5">
+                {{form.as_p}}
+                </div>
+            </div>
+            
+             <div class="container" align="center">
+                <button class="btn btn-info" type="submit">Borrar</button>
+                <button class="btn btn-danger" type="reset">Cancelar</button>
+             </div>
+
+        </form>
+    </div>  
+
+
+{% endblock %}

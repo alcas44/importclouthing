@@ -11,7 +11,7 @@ def updatearticulo(request,id):
          if request.method == 'GET':
             form = ArticulosForm(instance=articulo)
          else:
-            form = ArticulosForm(request.POST,instance = articulo)
+            form = ArticulosForm(request.POST,request.FILES,instance = articulo)
      
             if form.is_valid():
                 try:

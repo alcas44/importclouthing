@@ -50,7 +50,7 @@
                             <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
                                 <a class="dropdown-item" href="{% url 'VerArticulo' inventario.codigo %}"><i class="dw dw-eye"></i> Ver</a>
                                 <a class="dropdown-item" href="{% url 'UpdateArticulo' inventario.codigo %}"><i class="dw dw-edit2"></i> Editar</a>
-                                <a class="dropdown-item" href="#"><i class="dw dw-delete-3"></i> Borrar</a>
+                                <a class="dropdown-item" href="{% url 'DeleteArticulo' inventario.codigo %}"><i class="dw dw-delete-3"></i> Borrar</a>
                             </div>
                         </div>
                     </td>

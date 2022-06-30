@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'InventariosApp',
     'VerApp',
     'ActualizarApp',
+    'BorrarApp',
 ]
 
 MIDDLEWARE = [
