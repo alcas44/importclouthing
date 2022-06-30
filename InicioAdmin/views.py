@@ -9,7 +9,8 @@ def inicioadmin(request):
     else:
         articulos = Articulos.objects.all().count()
         clientes = Clientes.objects.all().count()
-        return render(request,"InicioAdmin/inicio.html",{'articulos':articulos,'clientes':clientes})
+        lastartis = Articulos.objects.all()[:3]
+        return render(request,"InicioAdmin/inicio.html",{'articulos':articulos,'clientes':clientes,'top3':lastartis})
 
 
             

@@ -27,6 +27,7 @@ urlpatterns = [
     path('ver/',include("VerApp.urls")),
     path('modificar/',include("ActualizarApp.urls")),
     path('borrar/',include("BorrarApp.urls")),
+    path('venta/',include("VentaApp.urls")),
     #Urls Asesores de Ventas
     path('asesor/',include("InicioAsesor.urls")),
 ]

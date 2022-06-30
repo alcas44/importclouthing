@@ -39,19 +39,6 @@
             <div class="card-box height-100-p widget-style1">
                 <div class="d-flex flex-wrap align-items-center">
                     <div class="progress-data">
-                        <img src="https://img.icons8.com/fluency/96/000000/shop-local.png"/>
-                    </div>
-                    <div class="widget-data">
-                        <div class="h4 mb-0">400</div>
-                        <div class="weight-600 font-14">Pedidos</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-3 mb-30">
-            <div class="card-box height-100-p widget-style1">
-                <div class="d-flex flex-wrap align-items-center">
-                    <div class="progress-data">
                         <img src="https://img.icons8.com/fluency/96/000000/group.png"/>
                     </div>
                     <div class="widget-data">
@@ -63,6 +50,19 @@
                         {% else %}
                         <div class="weight-600 font-14">Clientes</div>
                         {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 mb-30">
+            <div class="card-box height-100-p widget-style1">
+                <div class="d-flex flex-wrap align-items-center">
+                    <div class="progress-data">
+                        <img src="https://img.icons8.com/fluency/96/000000/shop-local.png"/>
+                    </div>
+                    <div class="widget-data">
+                        <div class="h4 mb-0">400</div>
+                        <div class="weight-600 font-14">Pedidos</div>
                     </div>
                 </div>
             </div>
@@ -94,35 +94,23 @@
 					<table class="table">
 						<thead>
 							<tr>
-								<th scope="col">#</th>
-								<th scope="col">First</th>
-								<th scope="col">Last</th>
-								<th scope="col">Handle</th>
-								<th scope="col">Tag</th>
+								<th scope="col">Codigo</th>
+								<th scope="col">Descripcio</th>
+								<th scope="col">Color</th>
+								<th scope="col">Precio</th>
+								<th scope="col">Accion</th>
 							</tr>
 						</thead>
 						<tbody>
+                            {% for last in top3 %}
 							<tr>
-								<th scope="row">1</th>
-								<td>Mark</td>
-								<td>Otto</td>
-								<td>@mdo</td>
-								<td><span class="badge badge-primary">Primary</span></td>
+								<td>{{ last.codigo }}</td>
+								<td>{{ last.descripcion }}</td>
+								<td>{{ last.color }}</td>
+								<td>Q.{{ last.precio_venta }}</td>
+								<td><a href="{% url 'VerArticulo' last.codigo %}"><span class="badge badge-primary">Ver</span></a></td>
 							</tr>
-							<tr>
-								<th scope="row">2</th>
-								<td>Jacob</td>
-								<td>Thornton</td>
-								<td>@fat</td>
-								<td><span class="badge badge-secondary">Secondary</span></td>
-							</tr>
-							<tr>
-								<th scope="row">3</th>
-								<td>Larry</td>
-								<td>the Bird</td>
-								<td>@twitter</td>
-								<td><span class="badge badge-success">Success</span></td>
-							</tr>
+                            {% endfor %}
 						</tbody>
 					</table>
 					

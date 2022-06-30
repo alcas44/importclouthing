@@ -1,0 +1,85 @@
+{% extends 'BaseApp/base.html' %}
+{% load static %}
+
+{% block content %}
+
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="title">
+                            <h4>Datos de Cliente</h4>
+                        </div>
+                        <div class="col-md-4 col-sm-12">
+                            <div class="form-group">
+                                <label>Nit</label>
+                                <form action="" method="POST">{% csrf_token %}
+                                <input type="text" name="dato" class="form-control" required maxlength="9">
+                                    <br>
+                                    <button type="submit" class="btn btn-primary">Buscar</button>
+                                
+                            </form>
+                            </div>
+                        </div>
+                    </div>
+             
+                </div>
+            </div>
+            
+
+
+            {% if dato %}                        
+                    <form>
+                    {% for d in dato %}    
+                    <div class="row">    
+                        <div class="col-md-4 col-sm-12">
+                            <div class="form-group">
+                                <label>Nit del Cliente</label>
+                                <input type="text" class="form-control" name="nit" value="{{ d.nit }}" readonly>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-12">
+                            <div class="form-group">
+                                <label>Negocio Cliente</label>
+                                <input type="text" class="form-control" name="negocio" value="{{ d.negocio }}" readonly>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-12">
+                            <div class="form-group">
+                                <label>Direccion Cliente</label>
+                                <input type="text" class="form-control" name="dir" value="{{ d.direccion }}" readonly>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">    
+                        <div class="col-md-4 col-sm-12">
+                            <div class="form-group">
+                                <label>Telefono del Cliente</label>
+                                <input type="text" class="form-control" name="tel" value="{{ d.telefono }}" readonly>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-12">
+                            <div class="form-group">
+                                <label>Fecha Venta</label>
+                                <input type="text" class="form-control" name="fecha" value="{{ f }}" readonly>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-12">
+                            <div class="form-group">
+                                <label>Numero de Envio</label>
+                                <input type="text" class="form-control" name="envio" autofocus="envio">
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    </form>
+                    {% else %}
+                        <p>No se Encontro Datos</p>
+                    {% endif %}
+            </div>
+
+    </div>
+
+
+{% endblock %}
