@@ -8,6 +8,17 @@
         <h4 class="text-info h4">Inventario de Articulos</h4>
         <input type="text" class="form-control" id="filtrar" placeholder="Filtrar Por Referencia" name="f" autofocus="f" />
     </div>
+    {% if messages %}
+          <ul class="messages">
+          {% for message in messages %}
+          <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong>{{message}}</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          {% endfor %}
+    {% endif %}
     <div class="pb-20">
         <table class="data-table table stripe hover nowrap table-responsive-lg">
             <thead>
@@ -38,7 +49,7 @@
                             </a>
                             <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
                                 <a class="dropdown-item" href="{% url 'VerArticulo' inventario.codigo %}"><i class="dw dw-eye"></i> Ver</a>
-                                <a class="dropdown-item" href="#"><i class="dw dw-edit2"></i> Editar</a>
+                                <a class="dropdown-item" href="{% url 'UpdateArticulo' inventario.codigo %}"><i class="dw dw-edit2"></i> Editar</a>
                                 <a class="dropdown-item" href="#"><i class="dw dw-delete-3"></i> Borrar</a>
                             </div>
                         </div>
@@ -50,7 +61,6 @@
     </div>
 
 </div>
-
 <script >
     function filtro() {
       // Accede al texto de entrada y a varios elementos del DOM

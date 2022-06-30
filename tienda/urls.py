@@ -25,6 +25,7 @@ urlpatterns = [
     path('ingresos/',include("IngresosApp.urls")),
     path('inventario/',include("InventariosApp.urls")),
     path('ver/',include("VerApp.urls")),
+    path('modificar/',include("ActualizarApp.urls")),
     #Urls Asesores de Ventas
     path('asesor/',include("InicioAsesor.urls")),
 ]
