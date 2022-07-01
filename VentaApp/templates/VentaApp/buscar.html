@@ -55,24 +55,29 @@
                     <div class="row">    
                         <div class="col-md-4 col-sm-12">
                             <div class="form-group">
-                                <label>Telefono del Cliente</label>
-                                <input type="text" class="form-control" name="tel" value="{{ d.telefono }}" readonly>
-                            </div>
-                        </div>
-                        <div class="col-md-4 col-sm-12">
-                            <div class="form-group">
                                 <label>Fecha Venta</label>
                                 <input type="text" class="form-control" name="fecha" value="{{ f }}" readonly>
                             </div>
                         </div>
                         <div class="col-md-4 col-sm-12">
                             <div class="form-group">
-                                <label>Numero de Envio</label>
-                                <input type="text" class="form-control" name="envio" autofocus="envio">
+                                <label>Numero Venta</label>
+                                <input type="text" class="form-control" name="venta" value="{{ c }}" readonly>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-12">
+                            <div class="form-group">
+                                <label>Vendedor</label>
+                                <input type="text" class="form-control" name="vendedor" value="{{ user.username }}" readonly>
                             </div>
                         </div>
                     </div>
                     {% endfor %}
+                    <div class="container" align="center">
+                        <button type="submit" class="btn btn-success">Datos Correctos</button>
+                        <a type="button" href="{% url 'IniciarVenta' %}" class="btn btn-danger">Datos Incorrectos</a>    
+                    </div>
+                    <br>
                     </form>
                     {% else %}
                         <p>No se Encontro Datos</p>
