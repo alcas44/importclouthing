@@ -1,0 +1,68 @@
+{% extends 'BaseApp/base.html' %}
+{% load static %}
+
+{% block content %}
+
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="title">
+                            <h4>Datos de Cliente</h4>
+                        </div>
+                    </div>
+             
+                </div>
+            </div>
+            
+{% if messages %}
+            <ul class="messages">
+            {% for message in messages %}
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+              <strong>{{message}}</strong>
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            {% endfor %}
+  {% endif %}                   
+                    <form action="#" method="POST">{% csrf_token %}  
+                    <div class="row">    
+                        <div class="col-md-4 col-sm-12">
+                            <div class="form-group">
+                                <label>Numero Venta</label>
+                                <input type="text" class="form-control" name="venta" value="{{ c }}" readonly>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-12">
+                            <div class="form-group">
+                                <label>Nit del Cliente</label>
+                                <input type="text" class="form-control" name="nit">
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-12">
+                            <div class="form-group">
+                                <label>Fecha Venta</label>
+                                <input type="date" class="form-control" name="fecha">
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-12">
+                            <div class="form-group">
+                                <label>Usuario</label>
+                                <input type="text" class="form-control" name="usuario" value="{{ user.username }}" readonly>
+                            </div>
+                        </div>
+                    </div>    
+                    <div class="container" align="center">
+                        <button type="submit" class="btn btn-success">Iniciar</button>
+                        <button type="reset"  class="btn btn-danger">Cancelar</a>    
+                    </div>
+                    <br>
+                    </form>
+            </div>
+
+    </div>
+
+
+{% endblock %}

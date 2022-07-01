@@ -1,40 +1,48 @@
+from calendar import c
+from tkinter import EW
 from django.shortcuts import render,redirect
 from IngresosApp.models import Articulos,Clientes
+from VentaApp.models import DatosVenta
 from datetime import datetime
+from django.contrib import messages
 
 contador = 0
 
-def iniciarventa(request):
+def iniciar(request):
     if not request.user.is_authenticated and not request.user.is_active and request.user.rol == 'admin':
         return redirect('/')
     else:
         global contador
         if request.method == "POST":
-            try:
-                dato = Clientes.objects.filter(nit=request.POST["dato"])
-                fecha = datetime.today()
-                contador = contador + 1 # hacer que aumente despues del save hacer un if para que acumule
-                return render(request,"VentaApp/buscar.html",{'dato':dato,'f':fecha,'c':contador})
-            except:
-                dato = "Error"
-                contador = contador - 1
-                return redirect('IniciarVenta')
+            v = DatosVenta()
+            v.venta = request.POST["venta"]
+            v.nit = request.POST["nit"]
+            v.fecha_venta = request.POST["fecha"]
+            v.vendedor = request.POST["usuario"]
+            v.estado = 0
+            v.save()
+            contador = contador + 1
+            return redirect('Venta',v.venta)
         else:
-            return render(request,"VentaApp/buscar.html")
+            contador = contador + 1
+            return render(request,"VentaApp/iniciar.html",{'c':contador})    
+
+    return render(request,"VentaApp/iniciar.html",{'c':contador})
+    
 
 
-def catalogo(request):
+def venta(request,id):
     if not request.user.is_authenticated and not request.user.is_active and request.user.rol == 'admin':
         return redirect('/')
     else:
-        pass
-
-
-
-
-def verarticulo(request,id):
-    if not request.user.is_authenticated and not request.user.is_active and request.user.rol == 'admin':
-        return redirect('/')
-    else:
-        articulos = Articulos.objects.filter(codigo=id)
-        return render(request,"VentaApp/articulos.html",{'form':articulos})
+        art = Articulos.objects.all().order_by() 
+        if request.method == "POST":
+            print("Venta--> "+str(id))
+            print("Codigo--> "+request.POST["codigo"])
+            print("Cantidad--> "+request.POST["cantidad"])
+            messages.success(request, 'Articulo Agregado a Carrito Exitosamente!.')
+            return redirect('Venta',id)
+        else:
+            pass    
+          
+    return render(request,"VentaApp/venta.html",{'art':art})

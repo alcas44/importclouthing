@@ -2,272 +2,73 @@
 {% load static %}
 
 {% block content %}
-
-    <div class="pd-ltr-20 xs-pd-20-10">
-        <div class="min-height-200px">
-            <div class="page-header">
-                <div class="row">
-                    <div class="col-md-6 col-sm-12">
-                        <div class="title">
-                            <h4>Datos de Cliente</h4>
-                        </div>
-                        <div class="col-md-4 col-sm-12">
-                            <div class="form-group">
-                                <label>Nit</label>
-                                <input type="text" class="form-control">
-                            </div>
-                        </div>
-                    </div>
-             
-                </div>
+<input type="text" class="form-control" id="filtrar" placeholder="Filtrar Por Referencia" name="f" autofocus="f" />
+<br>
+{% if messages %}
+            <ul class="messages">
+            {% for message in messages %}
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+              <strong>{{message}}</strong>
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
             </div>
-      
-       
+            {% endfor %}
+  {% endif %}
+  <br>
+  <button type="button" class="btn btn-primary btn-sm">Finalizar</button>
+  <br> <br>         
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Codigo</th>
+        <th scope="col">Referencia</th>
+        <th scope="col">Descripcion</th>
+        <th scope="col">Existencia</th>
+        <th scope="col">Cantidad</th>
+        <th scope="col">Accion</th>
+      </tr>
+    </thead>
+    <tbody id="nombres">
+      {% for a in art %}  
+      <tr>
+        <form action="" method="POST">{% csrf_token %}
+        <th scope="row"><input type="text" class="form-control" name="codigo" value="{{ a.codigo }}" readonly></th>
+        <td>{{ a.referencia }}</td>
+        <td>{{ a.descripcion }}</td>
+        <td>{{ a.existencia }}</td>
+        <td><input type="number" class="form-control" name="cantidad" required /></td>
+        <td><button class="btn btn-success" type="submit">+</button></td>
+        </form>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
 
-            <!-- Form grid Start -->
-            <div class="pd-20 card-box mb-30">
-                <div class="clearfix">
-                    <div class="pull-left">
-                        <h4 class="text-blue h4">Form grid</h4>
-                        <p class="mb-30">All bootstrap element classies</p>
-                    </div>
-                   
-                </div>
-                <form>
-                    <div class="row">
-                        <div class="col-md-4 col-sm-12">
-                            <div class="form-group">
-                                <label>col-md-4</label>
-                                <input type="text" class="form-control">
-                            </div>
-                        </div>
-                        <div class="col-md-4 col-sm-12">
-                            <div class="form-group">
-                                <label>col-md-4</label>
-                                <input type="text" class="form-control">
-                            </div>
-                        </div>
-                        <div class="col-md-4 col-sm-12">
-                            <div class="form-group">
-                                <label>col-md-4</label>
-                                <input type="text" class="form-control">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-3 col-sm-12">
-                            <div class="form-group">
-                                <label>col-md-3</label>
-                                <input type="text" class="form-control">
-                            </div>
-                        </div>
-                        <div class="col-md-3 col-sm-12">
-                            <div class="form-group">
-                                <label>col-md-3</label>
-                                <input type="text" class="form-control">
-                            </div>
-                        </div>
-                        <div class="col-md-3 col-sm-12">
-                            <div class="form-group">
-                                <label>col-md-3</label>
-                                <input type="text" class="form-control">
-                            </div>
-                        </div>
-                        <div class="col-md-3 col-sm-12">
-                            <div class="form-group">
-                                <label>col-md-3</label>
-                                <input type="text" class="form-control">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6 col-sm-12">
-                            <div class="form-group">
-                                <label>col-md-6</label>
-                                <input type="text" class="form-control">
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-sm-12">
-                            <div class="form-group">
-                                <label>col-md-6</label>
-                                <input type="text" class="form-control">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6 col-sm-12">
-                            <div class="form-group">
-                                <label>col-md-6</label>
-                                <input type="text" class="form-control">
-                            </div>
-                        </div>
-                        <div class="col-md-3 col-sm-12">
-                            <div class="form-group">
-                                <label>col-md-3</label>
-                                <input type="text" class="form-control">
-                            </div>
-                        </div>
-                        <div class="col-md-3 col-sm-12">
-                            <div class="form-group">
-                                <label>col-md-3</label>
-                                <input type="text" class="form-control">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12 col-sm-12">
-                            <div class="form-group">
-                                <label>col-md-12</label>
-                                <input type="text" class="form-control">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-2 col-sm-12">
-                            <div class="form-group">
-                                <label>col-md-2</label>
-                                <input type="text" class="form-control">
-                            </div>
-                        </div>
-                        <div class="col-md-2 col-sm-12">
-                            <div class="form-group">
-                                <label>col-md-2</label>
-                                <input type="text" class="form-control">
-                            </div>
-                        </div>
-                        <div class="col-md-2 col-sm-12">
-                            <div class="form-group">
-                                <label>col-md-2</label>
-                                <input type="text" class="form-control">
-                            </div>
-                        </div>
-                        <div class="col-md-2 col-sm-12">
-                            <div class="form-group">
-                                <label>col-md-2</label>
-                                <input type="text" class="form-control">
-                            </div>
-                        </div>
-                        <div class="col-md-2 col-sm-12">
-                            <div class="form-group">
-                                <label>col-md-2</label>
-                                <input type="text" class="form-control">
-                            </div>
-                        </div>
-                        <div class="col-md-2 col-sm-12">
-                            <div class="form-group">
-                                <label>col-md-2</label>
-                                <input type="text" class="form-control">
-                            </div>
-                        </div>
-                    </div>
-                </form>
-                <div class="collapse collapse-box" id="form-grid-form" >
-                    <div class="code-box">
-                        <div class="clearfix">
-                            <a href="javascript:;" class="btn btn-primary btn-sm code-copy pull-left"  data-clipboard-target="#form-grid"><i class="fa fa-clipboard"></i> Copy Code</a>
-                            <a href="#form-grid-form" class="btn btn-primary btn-sm pull-right" rel="content-y"  data-toggle="collapse" role="button"><i class="fa fa-eye-slash"></i> Hide Code</a>
-                        </div>
-                        <pre><code class="xml copy-pre" id="form-grid">
-<form>
-<div class="row">
-    <div class="col-md-4 col-sm-12">
-        <div class="form-group">
-            <label>col-md-4</label>
-            <input type="text" class="form-control">
-        </div>
-    </div>
-    <div class="col-md-4 col-sm-12">
-        <div class="form-group">
-            <label>col-md-4</label>
-            <input type="text" class="form-control">
-        </div>
-    </div>
-    <div class="col-md-4 col-sm-12">
-        <div class="form-group">
-            <label>col-md-4</label>
-            <input type="text" class="form-control">
-        </div>
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-3 col-sm-12">
-        <div class="form-group">
-            <label>col-md-3</label>
-            <input type="text" class="form-control">
-        </div>
-    </div>
-    <div class="col-md-3 col-sm-12">
-        <div class="form-group">
-            <label>col-md-3</label>
-            <input type="text" class="form-control">
-        </div>
-    </div>
-    <div class="col-md-3 col-sm-12">
-        <div class="form-group">
-            <label>col-md-3</label>
-            <input type="text" class="form-control">
-        </div>
-    </div>
-    <div class="col-md-3 col-sm-12">
-        <div class="form-group">
-            <label>col-md-3</label>
-            <input type="text" class="form-control">
-        </div>
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-6 col-sm-12">
-        <div class="form-group">
-            <label>col-md-6</label>
-            <input type="text" class="form-control">
-        </div>
-    </div>
-    <div class="col-md-6 col-sm-12">
-        <div class="form-group">
-            <label>col-md-6</label>
-            <input type="text" class="form-control">
-        </div>
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-6 col-sm-12">
-        <div class="form-group">
-            <label>col-md-6</label>
-            <input type="text" class="form-control">
-        </div>
-    </div>
-    <div class="col-md-3 col-sm-12">
-        <div class="form-group">
-            <label>col-md-3</label>
-            <input type="text" class="form-control">
-        </div>
-    </div>
-    <div class="col-md-3 col-sm-12">
-        <div class="form-group">
-            <label>col-md-3</label>
-            <input type="text" class="form-control">
-        </div>
-    </div>
-</div>
-</form>
-                        </code></pre>
-                    </div>
-                </div>
-            </div>
-            <!-- Form grid End -->
-
-
-        </div>
-    </div>
-
-
-<form action="" method="POST">{% csrf_token %}
-    <input type="text" name="dato"/>
-    <div class="container" align="center">
-        <button type="submit" class="btn btn-primary">Enviar</button>
-    </div>
-
-</form>
-
+  <script >
+    function filtro() {
+      // Accede al texto de entrada y a varios elementos del DOM
+      let valor = document.getElementById("filtrar").value.toUpperCase();
+      let nombres = document.getElementById("nombres");
+      let filas = nombres.getElementsByTagName("tr");
+    
+      // Iteramos el arreglo de filas
+      for(let i = 0; i < filas.length; i++){
+        // Por cada fila se obtiene la referencia a la columna negocio
+        let columnaLenguaje = filas[i].getElementsByTagName("td")[1];
+        console.log(columnaLenguaje);
+        // Se extrae el texto de la columna referencia
+        let lenguaje = columnaLenguaje.textContent;
+        // Se muestra u oculta la fila si la entrada de texto
+        // coincide con el texto de la columna lenguaje
+        filas[i].style.display = lenguaje.toUpperCase().indexOf(valor) > -1 ? "" : "none";
+      }
+    }
+    
+    // Se agrega un escuchador de eventos a la entrada de texto
+    // para activar la función de filtrado cada vez que el usuario
+    // ingresa texto en la entrada
+    document.getElementById("filtrar").addEventListener("keyup", filtro);
+    </script>            
 
 {% endblock %}
