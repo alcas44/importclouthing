@@ -16,7 +16,7 @@
             {% endfor %}
   {% endif %}
   <br>
-  <button type="button" class="btn btn-primary btn-sm">Finalizar</button>
+ 
   <br> <br>         
   <table class="table">
     <thead>
@@ -25,8 +25,11 @@
         <th scope="col">Referencia</th>
         <th scope="col">Descripcion</th>
         <th scope="col">Existencia</th>
+        <th scope="col">Precio</th>
         <th scope="col">Cantidad</th>
-        <th scope="col">Accion</th>
+        <th scope="col">Total</th>
+        <th scope="col">Agregar</th>
+        <th scope="col">Finalizar Compra</th>
       </tr>
     </thead>
     <tbody id="nombres">
@@ -37,8 +40,11 @@
         <td>{{ a.referencia }}</td>
         <td>{{ a.descripcion }}</td>
         <td>{{ a.existencia }}</td>
-        <td><input type="number" class="form-control" name="cantidad" required /></td>
+        <td><input type="number" class="form-control" name="precio" value="{{ a.precio_venta }}" readonly id="txt_campo_1"></td>
+        <td><input type="number" class="form-control" name="cantidad"  id="txt_campo_2" onchange="multiplica(this.value);"/></td>
+        <td><input type="number" class="form-control" name="total" readonly  id="total"/></td>
         <td><button class="btn btn-success" type="submit">+</button></td>
+        <td><button class="btn btn-danger" type="submit" name="fin">Fin</button></td>
         </form>
       </tr>
       {% endfor %}
@@ -69,6 +75,22 @@
     // para activar la función de filtrado cada vez que el usuario
     // ingresa texto en la entrada
     document.getElementById("filtrar").addEventListener("keyup", filtro);
-    </script>            
+    </script>      
+    
+    
+
+    <script>
+      /* Multiplicar dos números. */
+    function multiplica (valor) {
+    var cantidad = 0.00;
+    cantidad = parseFloat(valor).toFixed(2);
+    var precio = document.getElementById("txt_campo_1").value;
+    precio_compra = parseFloat(precio).toFixed(2)
+    console.log(parseFloat(precio_compra*cantidad));
+    document.getElementById("total").value = parseFloat(precio_compra*cantidad).toFixed(2);
+    //document.getElementById('spTotal').innerHTML = total;
+    
+}
+    </script>
 
 {% endblock %}

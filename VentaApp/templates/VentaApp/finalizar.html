@@ -1,0 +1,56 @@
+{% extends 'BaseApp/base.html' %}
+{% load static %}
+
+{% block content %}
+<h3>Resumen del # de Venta <strong>{{id}}</strong></h3>
+<br>
+{% if messages %}
+            <ul class="messages">
+            {% for message in messages %}
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+              <strong>{{message}}</strong>
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            {% endfor %}
+  {% endif %}
+  <br>
+  {{id}}
+  <form action="" method="POST">{% csrf_token %}
+  <button type="submit" class="btn btn-primary btn-sm">Finalizar</button>
+  </form>
+  <br> <br>         
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Codigo</th>
+        <th scope="col">Referencia</th>
+        <th scope="col">Descripcion</th>
+        <th scope="col">Existencia</th>
+        <th scope="col">Precio</th>
+        <th scope="col">Cantidad</th>
+        <th scope="col">Total</th>
+        <th scope="col">Accion</th>
+      </tr>
+    </thead>
+    <tbody id="nombres">
+      {% for a in art %}  
+      <tr>
+        <form action="" method="POST">{% csrf_token %}
+        <th scope="row"><input type="text" class="form-control" name="codigo" value="{{ a.codigo }}" readonly></th>
+        <td>{{ a.referencia }}</td>
+        <td>{{ a.descripcion }}</td>
+        <td>{{ a.existencia }}</td>
+        <td><input type="number" class="form-control" name="precio" value="{{ a.precio_venta }}" readonly onchange="multiplica(this.value);" id="txt_campo_1"></td>
+        <td><input type="number" class="form-control" name="cantidad" required id="txt_campo_2" onchange="multiplica(this.value);"/></td>
+        <td><input type="number" class="form-control" name="total" readonly required id="total"/></td>
+        </form>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+
+
+{% endblock %}
