@@ -20,7 +20,6 @@ def iniciar(request):
             v.fecha_venta = request.POST["fecha"]
             v.vendedor = request.POST["usuario"]
             v.estado = 0
-            print(request.POST["fin"])
             v.save()
             contador = contador + 1
             return redirect('Venta',v.venta)    
