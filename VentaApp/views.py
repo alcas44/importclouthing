@@ -21,7 +21,7 @@ def iniciar(request):
             v.vendedor = request.POST["usuario"]
             v.estado = 0
             v.save()
-            contador = contador + 1
+            #contador = contador + 1
             return redirect('Venta',v.venta,v.nit)    
         else:
             pass    
