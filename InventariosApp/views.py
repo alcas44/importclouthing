@@ -1,5 +1,7 @@
+from itertools import count
 from django.shortcuts import render,redirect
 from IngresosApp.models import Articulos,Clientes
+from VentaApp.models import Detalle,DatosVenta
 
 def inventarioarti(request):
     if not request.user.is_authenticated and not request.user.is_active and request.user.rol == 'admin':

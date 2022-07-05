@@ -16,7 +16,7 @@ def iniciar(request):
         if request.method == "POST":
             v = DatosVenta()
             v.venta = request.POST["venta"]
-            v.nit = request.POST["nit"]
+            v.nit = Clientes.objects.get(nit = request.POST["nit"])
             v.fecha_venta = request.POST["fecha"]
             v.vendedor = request.POST["usuario"]
             v.estado = 0
@@ -52,8 +52,9 @@ def venta(request,id,n):
                     else:
                         d = Detalle()  
                         acu = acu +float(request.POST["precio"])*int(request.POST["cantidad"])
-                        d.venta = id
+                        d.venta = DatosVenta.objects.get(venta=id)
                         d.codigo = request.POST["codigo"]
+                        d.nit = n
                         d.precio = request.POST["precio"]
                         d.cantidad = request.POST["cantidad"]
                         d.total = float(request.POST["precio"])*int(request.POST["cantidad"])
@@ -74,7 +75,7 @@ def fin_venta(request,id,n):
     else:
         cliente = Clientes.objects.filter(nit=n)
         resumen = Detalle.objects.filter(venta=id)
-        if request.method == "POST":
+        if request.method == "POST" and request.POST["venta"] == id and resumen.estado == 0:
             DatosVenta.objects.filter(venta=id).update(estado=1)
             for r in resumen:
                 Detalle.objects.filter(venta=id,codigo=r.codigo).update(estado=1)   

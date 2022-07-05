@@ -42,7 +42,6 @@ class Clientes(models.Model):
     telefono=models.CharField(max_length=9,blank=False)
     telefono2=models.CharField(max_length=9,blank=False)
     correo=models.CharField(max_length=250,blank=True)
-    cuenta=models.FloatField()
     usuario=models.CharField(max_length=200,blank=False)
     created=models.DateTimeField(auto_now_add=True)
     updated=models.DateTimeField(auto_now_add=True)

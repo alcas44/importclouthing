@@ -1,6 +1,10 @@
 import imp
 from django.shortcuts import render,redirect
 from IngresosApp.models import Articulos,Clientes
+from VentaApp.models import Detalle,DatosVenta
+from django.db.models import Sum
+
+from VentaApp.views import venta
 
 def verarticulo(request,id):
     if not request.user.is_authenticated and not request.user.is_active and request.user.rol == 'admin':
