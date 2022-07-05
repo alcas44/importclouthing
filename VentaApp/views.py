@@ -24,9 +24,8 @@ def iniciar(request):
             contador = contador + 1
             return redirect('Venta',v.venta,v.nit)    
         else:
-            contador = contador + 1
-            return render(request,"VentaApp/iniciar.html",{'c':contador})    
-
+            pass    
+    contador = contador + 1
     return render(request,"VentaApp/iniciar.html",{'c':contador})
     
 
@@ -42,6 +41,7 @@ def venta(request,id,n):
         if request.method == "POST":
             global acu
             if "fin" in request.POST:
+                acu = 0   
                 return redirect("FinVenta",id,n)
             else:
                 stock = Articulos.objects.filter(codigo=request.POST["codigo"])
@@ -64,7 +64,7 @@ def venta(request,id,n):
                     
         else:
             pass    
-          
+       
     return render(request,"VentaApp/venta.html",{'art':art,'cli':cliente,'acu':acu})
 
 
@@ -74,8 +74,8 @@ def fin_venta(request,id,n):
         return redirect('/')
     else:
         cliente = Clientes.objects.filter(nit=n)
-        resumen = Detalle.objects.filter(venta=id)
-        if request.method == "POST" and request.POST["venta"] == id and resumen.estado == 0:
+        resumen = Detalle.objects.filter(venta=id,estado=0)
+        if request.method == "POST":
             DatosVenta.objects.filter(venta=id).update(estado=1)
             for r in resumen:
                 Detalle.objects.filter(venta=id,codigo=r.codigo).update(estado=1)   
