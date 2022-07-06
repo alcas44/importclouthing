@@ -37,4 +37,4 @@ class Detalle(models.Model):
         verbose_name_plural="detalles"
 
     def __str__(self):
-        return self.venta #como va a aparecer en el panel admin       
+        return str(self.venta) #como va a aparecer en el panel admin       
