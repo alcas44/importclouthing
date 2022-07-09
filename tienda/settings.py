@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'ActualizarApp',
     'BorrarApp',
     'VentaApp',
+    'ReportesApp',
 ]
 
 MIDDLEWARE = [

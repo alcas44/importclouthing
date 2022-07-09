@@ -6,53 +6,38 @@
 <div class="card-box mb-30">
     <div class="pd-30">
         <h4 class="text-info h4">Inventario de Clientes</h4>
-        <input type="text" class="form-control" id="filtrar" placeholder="Filtrar Por Negocio" name="f" autofocus="f" />
+        <input type="text" class="form-control" id="filtrar" placeholder="Filtrar Por # Venta" name="f" autofocus="f" />
     </div>
-    {% if messages %}
-          <ul class="messages">
-          {% for message in messages %}
-          <div class="alert alert-warning alert-dismissible fade show" role="alert">
-            <strong>{{message}}</strong>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          {% endfor %}
-    {% endif %}
     <div class="pb-20">
         <table class="data-table table stripe hover nowrap table-responsive-lg">
             <thead>
                 <tr>
-                    <th>Nit Cliente</th>
-                    <th>Negocio Cliente</th>
-                    <th>Nombres Apellidos</th>
-                    <th>Direccion</th>
-                    <th>Telefono</th>
-                    <th>Telefono 2</th>
-                    <th>Correo Electronico</th>
+                    <th># Venta</th>
+                    <th>Negocio</th>
+                    <th>Fecha Compra</th>
+                    <th>Estado</th>
                     <th class="datatable-nosort">Accion</th>
                 </tr>
             </thead>
             <tbody id="nombres">
-                {% for inventario in art %}
+                {% for v in vc %}
                 <tr>
-                    <td>{{ inventario.nit }}</td>
-                    <td>{{ inventario.negocio }}</td>
-                    <td>{{ inventario.nombres }} {{ inventario.apellidos }}</td>
-                    <td>{{ inventario.direccion }}</td>
-                    <td>{{ inventario.telefono }}</td>
-                    <td>{{ inventario.telefono2 }}</td>
-                    <td>{{ inventario.correo }}</td>
+                    <td>{{ v.venta }}</td>
+                    <td>{{ ver.negocio }}</td>
+                    <td>{{v.fecha_venta}}</td>
+                    {% if v.estado == 1 %}
+                    <td>Hecha</td>
+                    {% endif %}
                     <td>
                         <div class="dropdown">
                             <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
                                 <i class="dw dw-more"></i>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-                                <a class="dropdown-item" href="{% url 'VerCliente' inventario.nit %}"><i class="dw dw-eye"></i> Ver</a>
-                                <a class="dropdown-item" href="{% url 'ReporteCliente' inventario.nit %}"><i class="dw dw-eye"></i>Reporte Ventas</a>
-                                <a class="dropdown-item" href="{% url 'UpdateCliente' inventario.nit %}"><i class="dw dw-edit2"></i> Editar</a>
-                                <a class="dropdown-item" href="{% url 'DeleteCliente' inventario.nit %}"><i class="dw dw-delete-3"></i> Borrar</a>
+                                <a class="dropdown-item" href="#"><i class="dw dw-eye"></i> Ver</a>
+                                <a class="dropdown-item" href="#"><i class="dw dw-eye"></i>Reporte Ventas</a>
+                                <a class="dropdown-item" href="#"><i class="dw dw-edit2"></i> Editar</a>
+                                <a class="dropdown-item" href="#"><i class="dw dw-delete-3"></i> Borrar</a>
                             </div>
                         </div>
                     </td>
@@ -72,8 +57,8 @@
     
       // Iteramos el arreglo de filas
       for(let i = 0; i < filas.length; i++){
-        // Por cada fila se obtiene la referencia a la columna negocio
-        let columnaLenguaje = filas[i].getElementsByTagName("td")[1];
+        // Por cada fila se obtiene la referencia a la columna venta
+        let columnaLenguaje = filas[i].getElementsByTagName("td")[0];
         console.log(columnaLenguaje);
         // Se extrae el texto de la columna referencia
         let lenguaje = columnaLenguaje.textContent;
