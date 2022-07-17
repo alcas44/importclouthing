@@ -1,0 +1,28 @@
+{% extends 'BaseApp/base.html' %}
+{% load static %}
+
+{% block content %}
+{% if messages %}
+            <ul class="messages">
+            {% for message in messages %}
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+              <strong>{{message}}</strong>
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            {% endfor %}
+  {% endif %} 
+
+  <div class="contianer" style="width: 800px; height: 200px; background-color: beige; margin-left: 150px;;" align="center">
+    <br>
+    <h1>Verificador <a href="#">{{v}}</a></h1>
+    
+    <br>
+    <br>
+    <a type="button" class="btn btn-success" href="{% url 'IniciarVenta' %}">Finalizar</a>
+    <a type="button" class="btn btn-primary" href="{% url 'Envios' v n %}">Realizar Envio</a>
+  </div>
+  
+
+{% endblock %}

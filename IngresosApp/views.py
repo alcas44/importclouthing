@@ -2,7 +2,7 @@
 from django.contrib import messages
 from django.shortcuts import render,redirect,HttpResponse
 from IngresosApp.models import Articulos,Clientes,Envios
-from .forms import ArticulosForm,ClientesForm,EnviosForm
+from .forms import ArticulosForm,ClientesForm
 from datetime import datetime
 
 def nuevoarticulo(request):
@@ -80,39 +80,3 @@ def nuevocliente(request):
 
 
 
-def nuevoenvio(request):
-     if not request.user.is_authenticated and not request.user.is_active:
-        redirect('/')
-     else:    
-        form = EnviosForm()
-        if request.method == "POST":
-            form = EnviosForm(request.POST)
-            if form.is_valid():
-              try:
-                cod = Envios.objects.filter(codigo=request.POST['codigo'])
-                vent = Envios.objects.filter(venta=request.POST['venta'])
-                if(cod and vent):
-                    messages.error(request, 'El Numero de Envio o Numero ya Venta Ya Existe.')
-                    return redirect('NuevoEnvio')
-                else:
-                  data = Envios()
-                  data.codigo = form.cleaned_data["codigo"]
-                  data.tipo = form.cleaned_data["tipo"]
-                  data.remitente = form.cleaned_data["remitente"]
-                  data.destinatario = form.cleaned_data["destinatario"]
-                  data.direccion = form.cleaned_data["direccion"]
-                  data.telefono = form.cleaned_data["telefono"]
-                  data.estado = form.cleaned_data["estado"]
-                  data.monto = form.cleaned_data["monto"]
-                  data.guia = form.cleaned_data["guia"]
-                  data.observacion = form.cleaned_data["observacion"]
-                  data.usuario = request.user
-                  data.created = datetime.today()
-                  data.updated = datetime.today()
-                  data.save()
-                  messages.success(request, 'Envio Ingresado Exitosamente!.')                
-                  return redirect('NuevoEnvio')
-              except:
-                return render(request,"IngresosApp/nuevoenvio.html",{'form':form})
-                
-        return render(request,"IngresosApp/nuevoenvio.html",{'form':form})

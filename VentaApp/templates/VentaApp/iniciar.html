@@ -38,13 +38,13 @@
                         <div class="col-md-4 col-sm-12">
                             <div class="form-group">
                                 <label>Nit del Cliente</label>
-                                <input type="text" class="form-control" name="nit">
+                                <input type="text" class="form-control" name="nit" autofocus="nit" required placeholder="1234567-8">
                             </div>
                         </div>
                         <div class="col-md-4 col-sm-12">
                             <div class="form-group">
                                 <label>Fecha Venta</label>
-                                <input type="date" class="form-control" name="fecha">
+                                <input type="text" class="form-control" name="fecha" value="{% now 'd-m-Y' %}" readonly>
                             </div>
                         </div>
                         <div class="col-md-4 col-sm-12">

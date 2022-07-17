@@ -1,0 +1,175 @@
+{% extends 'BaseApp/base.html' %}
+{% load static %}
+
+{% block content %}
+{% if messages %}
+            <ul class="messages">
+            {% for message in messages %}
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+              <strong>{{message}}</strong>
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            {% endfor %}
+  {% endif %} 
+  
+  <div class="container" align="center" style="width: 1000px; background-color: white; height: auto;">
+    <div class="container-fluid" align="center">
+        <br>
+        <h4>Detalles de la Venta</h4>
+        <hr>
+      
+      <form action="" method="POST">{% csrf_token %}
+        
+        <h6 class="text-danger" align="left">Datos del Cliente</h6>
+        <br>
+        {% for v in v %}
+        <div class="row">
+          <div class="col-md-4 col-sm-12">
+            <div class="form-group">
+              <label>Nit de Cliente</label>
+              <input type="text" class="form-control" name="nit" readonly value="{{v.nit}}">
+            </div>
+          </div>
+          <div class="col-md-4 col-sm-12">
+            <div class="form-group">
+              <label>Negocio Cliente</label>
+              <input type="text" class="form-control" readonly value="{{v.negocio}}">
+            </div>
+          </div>
+          <div class="col-md-4 col-sm-12">
+            <div class="form-group">
+              <label>Direccion Negocio</label>
+              <input type="text" class="form-control" readonly value="{{v.direccion}}">
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-4 col-sm-12">
+            <div class="form-group">
+              <label>Telefono Principal de Cliente</label>
+              <input type="text" class="form-control" readonly value="{{v.telefono}}">
+            </div>
+          </div>
+          <div class="col-md-4 col-sm-12">
+            <div class="form-group">
+              <label>Telefono Auxiliar de Cliente</label>
+              <input type="text" class="form-control" readonly value="{{v.telefono2}}">
+            </div>
+          </div>
+          <div class="col-md-4 col-sm-12">
+            <div class="form-group">
+              <label>Correo Cliente</label>
+              <input type="text" class="form-control" readonly value="{{v.correo}}">
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+        <br>
+        <h6 class="text-danger" align="left">Datos de la Venta</h6>
+        <br>
+        {% for n in n %}
+        <div class="row">
+
+          <div class="col-md-4 col-sm-12">
+            <div class="form-group">
+              <label># de Venta</label>
+              <input type="text" class="form-control" name="venta" readonly value="{{n.venta}}">
+            </div>
+          </div>
+
+          <div class="col-md-4 col-sm-12">
+            <div class="form-group">
+              <label>Fecha de Compra</label>
+              <input type="text" class="form-control" name="fecha" readonly value="{{n.fecha_venta}}">
+            </div>
+          </div>
+
+          <div class="col-md-4 col-sm-12">
+            <div class="form-group">
+              <label>Total de Venta</label>
+              <input type="text" class="form-control" name="total" readonly value="{{t.tot}}">
+            </div>
+          </div>
+              
+          
+        </div>
+        {% endfor %}
+
+        <br>
+        <h6 class="text-danger" align="left">Detalle de la Venta</h6>
+        <br>
+
+        {% for d in d %}
+        <div class="row">
+          
+          <div class="col-md-2 col-sm-12">
+            <div class="form-group">
+              <label># de Venta</label>
+              <input type="text" class="form-control" readonly value="{{d.venta}}">
+            </div>
+          </div>
+          
+          <div class="col-md-2 col-sm-12">
+            <div class="form-group">
+              <label>Codigo de Articulo</label>
+              <input type="text" class="form-control" readonly value="{{d.codigo}}">
+            </div>
+          </div>
+          
+          <div class="col-md-2 col-sm-12">
+            <div class="form-group">
+              <label>Precio Unitario</label>
+              <input type="text" class="form-control" readonly value="{{d.precio}}">
+            </div>
+          </div>
+          
+          <div class="col-md-2 col-sm-12">
+            <div class="form-group">
+              <label>Cantidad</label>
+              <input type="text" class="form-control" readonly value="{{d.cantidad}}">
+            </div>
+          </div>
+          
+          <div class="col-md-2 col-sm-12">
+            <div class="form-group">
+              <label>Total</label>
+              <input type="text" class="form-control" readonly value="{{d.total}}">
+            </div>
+            
+        </div>
+
+        {% endfor %}
+        
+        <div class="col-md-12 col-sm-12">
+          <div class="form-group">
+            <br>
+            <h6 class="text-danger" align="left">Forma de Pago</h6>
+            <hr>
+            <select name="tipo" class="form-control" required>
+              <option value="" selected="selected" align="center">--------Elija Forma de Pago--------</option>
+              <option value="Efectivo">Efectivo</option>
+              <option value="Cheque">Cheque</option>
+              <option value="Tarjeta">Tarjeta Debito/Credito</option>
+              <option value="Deposito">Deposito Bancario</option>
+              <option value="Dolares">Dolares</option>
+            </select>
+          </div>
+        </div>
+    
+
+        <div class="container" align="center">
+          <button type="submit" class="btn btn-primary">Iniciar Forma de Pago</button>
+        </div>
+
+      </form>  
+        
+
+    </div>
+  </div>
+  
+  
+
+{% endblock %}

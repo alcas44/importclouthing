@@ -1,4 +1,5 @@
 from calendar import c
+from glob import glob
 from tkinter import EW
 from django.shortcuts import render,redirect
 from IngresosApp.models import Articulos,Clientes
@@ -6,27 +7,67 @@ from VentaApp.models import DatosVenta, Detalle
 from datetime import datetime
 from django.contrib import messages
 
-contador = 0
-
+cont = 0
 def iniciar(request):
     if not request.user.is_authenticated and not request.user.is_active and request.user.rol == 'admin':
         return redirect('/')
     else:
-        global contador
-        if request.method == "POST":
-            v = DatosVenta()
-            v.venta = request.POST["venta"]
-            v.nit = Clientes.objects.get(nit = request.POST["nit"])
-            v.fecha_venta = request.POST["fecha"]
-            v.vendedor = request.POST["usuario"]
-            v.estado = 0
-            v.save()
-            #contador = contador + 1
-            return redirect('Venta',v.venta,v.nit)    
-        else:
-            pass    
-    contador = contador + 1
-    return render(request,"VentaApp/iniciar.html",{'c':contador})
+            global cont
+            v = DatosVenta.objects.order_by('venta').last()#devuelve ultimo ingreso
+            if v == None:
+                cont = 1001
+                if request.method == "POST":
+                    if cont != request.POST["venta"]:
+                        v = DatosVenta()
+                        v.venta = request.POST["venta"]
+                        v.nit = Clientes.objects.get(nit = request.POST["nit"])
+                        v.fecha_venta = request.POST["fecha"]
+                        v.vendedor = request.POST["usuario"]
+                        v.estado = 0
+                        v.save()
+                        return redirect('Venta',v.venta,v.nit)
+                    else:
+                        v = DatosVenta()
+                        v.venta = cont+1
+                        v.nit = Clientes.objects.get(nit = request.POST["nit"])
+                        v.fecha_venta = request.POST["fecha"]
+                        v.vendedor = request.POST["usuario"]
+                        v.estado = 0
+                        v.save()
+                        cont = cont+1
+                        return redirect('Venta',v.venta,v.nit)
+                else:
+                    pass      
+                
+            else:
+                c = DatosVenta.objects.order_by('venta').last()#devuelve ultimo ingreso  
+                cont = c.venta+1
+                if request.method == "POST":
+                    if c.venta != request.POST["venta"]:
+                        v = DatosVenta()
+                        v.venta = request.POST["venta"]
+                        v.nit = Clientes.objects.get(nit = request.POST["nit"])
+                        v.fecha_venta = request.POST["fecha"]
+                        v.vendedor = request.POST["usuario"]
+                        v.estado = 0
+                        v.save()
+                        return redirect('Venta',v.venta,v.nit)
+                    else:
+                        v = DatosVenta()
+                        v.venta = cont+1
+                        v.nit = Clientes.objects.get(nit = request.POST["nit"])
+                        v.fecha_venta = request.POST["fecha"]
+                        v.vendedor = request.POST["usuario"]
+                        v.estado = 0
+                        v.save()
+                        cont = cont+1
+                        return redirect('Venta',v.venta,v.nit)
+                else:
+                    pass      
+            
+            
+
+    return render(request,"VentaApp/iniciar.html",{'c':cont})
     
 
 
@@ -83,8 +124,8 @@ def fin_venta(request,id,n):
                 for a in art:
                     nueva_stock = a.existencia-r.cantidad
                     Articulos.objects.filter(codigo=r.codigo).update(existencia=nueva_stock)                            
-            messages.success(request, 'Venta Finaliza Exitosamente!.')
-            return redirect('IniciarVenta')
+            messages.success(request, 'Seleccion de Articulos Finaliza Exitosamente!.')
+            return redirect('Pago',id,n)
         else:
             pass    
           

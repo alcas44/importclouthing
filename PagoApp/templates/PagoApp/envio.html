@@ -1,0 +1,124 @@
+{% extends 'BaseApp/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="pd-20 card-box mb-30">
+    <div class="clearfix mb-20">
+        <div class="pull-left">
+            <h4 class="text-blue h4">Confirmacion de Envio</h4>
+        </div>
+    </div>   
+    <h4 class="text-danger h4">Confirmacion de Datos para Envio</h4>
+<form action="" method="POST"> {% csrf_token %}
+    <div class="row">
+        <div class="col-md-3 col-sm-12">
+                <div class="form-group">
+                    <label>Verificador de Pago</label>
+                    <input class="form-control" readonly value="{{v}}" name="verificador" type="text">
+                </div>                          
+        </div>
+        <div class="col-md-3 col-sm-12">
+            <div class="form-group">
+                <label>Remitente</label>
+                <input class="form-control" readonly value="Import Clouthing" name="remitente" type="text">
+            </div>                          
+        </div>
+        <div class="col-md-3 col-sm-12">
+            <div class="form-group">
+                <label>Direccion Remitente</label>
+                <input class="form-control" readonly value="Colonia la Soledad,Zacapa" name="dir_remitente" type="text">
+            </div>                          
+        </div>
+        <div class="col-md-3 col-sm-12">
+            <div class="form-group">
+                <label>Telefono Remitente</label>
+                <input class="form-control" readonly value="1234-5678" name="tel_remitente" type="text">
+            </div>                          
+        </div>
+    </div>
+
+    <div class="row">
+        {% for cl in c %}
+        <div class="col-md-3 col-sm-12">
+                <div class="form-group">
+                    <label>Destinatario</label>
+                    <input class="form-control" readonly value="{{cl.negocio}}" name="destinatario" type="text">
+                </div>                          
+        </div>
+        <div class="col-md-3 col-sm-12">
+            <div class="form-group">
+                <label>Direccion Destinatario</label>
+                <input class="form-control" readonly value="{{cl.direccion}}" name="direccion" type="text">
+            </div>                          
+        </div>
+        <div class="col-md-3 col-sm-12">
+            <div class="form-group">
+                <label>Telefono Destinatario</label>
+                <input class="form-control" readonly value="{{cl.telefono}}" name="tel" type="text">
+            </div>                          
+        </div>
+        <div class="col-md-3 col-sm-12">
+            <div class="form-group">
+                <label>Nombre del Destinatario</label>
+                <input class="form-control" readonly value="{{cl.nombres}},{{cl.apellidos}}" name="nombres" type="text">
+                
+            </div>                          
+        </div>
+    </div>
+    {% endfor %}
+    <h4 class="text-danger h4">Datos de Venta</h4>
+    <div class="row">
+        {% for e in e %}
+        <div class="col-md-3 col-sm-12">
+                <div class="form-group">
+                    <label>Numero de Venta</label>
+                    <input class="form-control" readonly value="{{e.venta}}" name="venta" type="text">
+                </div>                          
+        </div>
+        <div class="col-md-3 col-sm-12">
+            <div class="form-group">
+                <label>Nit del Cliente</label>
+                <input class="form-control" readonly value="{{e.nit}}" name="nit" type="text">
+            </div>                          
+        </div>
+        <div class="col-md-3 col-sm-12">
+            <div class="form-group">
+                <label>Total de la Venta</label>
+                <input class="form-control" readonly value="{{e.total_venta}}" name="totalv" type="text">
+            </div>                          
+        </div>
+        <div class="col-md-3 col-sm-12">
+            <div class="form-group">
+                <label>Total Pagado</label>
+                <input class="form-control" readonly value="{{e.total_pago}}" name="totalp" type="text">
+            </div>                          
+        </div>
+        <div class="col-md-3 col-sm-12">
+            <div class="form-group">
+                <label>Tipo de Pago</label>
+                <input class="form-control" readonly value="{{e.tipo_pago}}" name="tipo" type="text">
+            </div>                          
+        </div>
+        <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+                <label>Observaciones del Envio</label>
+                <input class="form-control" name="obs" autofocus="obs" placeholder="Observaciones del Envio" type="text">
+            </div>                          
+        </div>
+        <div class="col-md-3 col-sm-12">
+            <div class="form-group">
+                <label>Fecha Ingreso Envio</label>
+                <input class="form-control" readonly value="{% now 'd-m-Y' %}" name="fecha" type="text">
+            </div>                          
+        </div>
+        <div class="col-md-5 col-sm-12">
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Registrar</button>
+            </div>                          
+        </div>
+    </div>
+    {% endfor %}
+</form>
+</div>
+
+{% endblock %}

@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'BorrarApp',
     'VentaApp',
     'ReportesApp',
+    'PagoApp',
 ]
 
 MIDDLEWARE = [

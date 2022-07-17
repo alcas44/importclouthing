@@ -27,6 +27,10 @@
                     <td>{{v.fecha_venta}}</td>
                     {% if v.estado == 1 %}
                     <td>Hecha</td>
+                    {% elif v.estado == 0 %}
+                    <td>Pendiente</td>
+                    {% else %}
+                    <td>Venta Anulada</td>
                     {% endif %}
                     <td>
                         <div class="dropdown">
