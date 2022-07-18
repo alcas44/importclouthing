@@ -1,0 +1,79 @@
+{% extends 'BaseApp/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="pd-20 card-box mb-30">
+    <div class="clearfix">
+        <div class="pull-left">
+            {% for detalle in form %} <h4 class="text-info">Nit Cliente: </h4><h3 class="text-danger">{{ detalle.nit }}</h3> 
+            <p class="mb-5">Negocio Cliente: <strong>{{ detalle.negocio }}</strong></p>
+            <p class="mb-5">Nombre de Cliente: <strong>{{ detalle.nombres }} {{ detalle.apellidos }} </strong></p>
+            {% endfor %}
+            <br>
+        </div>
+        <div class="pull-right">
+            <button class="btn btn-primary btn-sm scroll-click" rel="content-y" onclick="javascript:window.print()"  data-toggle="collapse" role="button"><i class="fa fa-print"></i> Imprimir</button>
+            <a href="{% url 'InventarioClientes' %}" class="btn btn-success">Regresar</a>
+        </div>
+    </div>
+    <div class="pb-20">
+        <table class="data-table table stripe hover nowrap table-responsive-lg">
+            <thead>
+                <tr>
+                    <th># de Venta</th>
+                    <th>Cliente</th>
+                    <th>Total Compra</th>
+                    <th>Total Pagado</th>
+                    <th>Tipo de Venta</th>
+                    <th class="datatable-nosort">Detalles</th>
+                </tr>
+            </thead>
+            <tbody id="nombres">
+                {% for v in v %}
+                <tr>
+                    <td>{{ v.venta }}</td>
+                    <td>{{ v.destinatario }}</td>
+                    <td>{{ v.monto }}</td>
+                    <td>{{ v.total }}</td>
+                    <td>{{ v.tipo }}</td>
+                    <td>
+                        <div class="dropdown">
+                            <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+                                <i class="dw dw-more"></i>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
+                                <table class="table">
+                                    <thead>
+                                      <tr>
+                                        <th scope="col">Articulo</th>
+                                        <th scope="col">Cantidad</th>
+                                        <th scope="col">Precio Un.</th>
+                                        <th scope="col">Total</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                     {% for d in d %}
+                                      <tr>
+                                        <th scope="row">{{ d.codigo }}</th>
+                                        <td>{{ d.cantidad }}</td>
+                                        <td>{{ d.precio }}</td>
+                                        <td>{{ d.total }}</td>
+                                      </tr>
+                                      {% endfor %}
+                                    </tbody>
+                                  </table>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+
+  
+</div>
+
+{% endblock %}

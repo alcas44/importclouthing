@@ -9,8 +9,8 @@
             {% for detalle in form %} <h4 class="text-info">Nit Cliente: </h4><h3 class="text-danger">{{ detalle.nit }}</h3> 
             <p class="mb-5">Negocio Cliente: <strong>{{ detalle.negocio }}</strong></p>
             <p class="mb-5">Nombre de Cliente: <strong>{{ detalle.nombres }} {{ detalle.apellidos }} </strong></p>
-            <p class="mb-30">Total Comprado: <strong>Q.{{ detalle.cuenta }}</strong></p>
             {% endfor %}
+            <br>
         </div>
         <div class="pull-right">
             <button class="btn btn-primary btn-sm scroll-click" rel="content-y" onclick="javascript:window.print()"  data-toggle="collapse" role="button"><i class="fa fa-print"></i> Imprimir</button>

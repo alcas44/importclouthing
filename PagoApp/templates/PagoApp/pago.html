@@ -24,7 +24,7 @@
         
         <h6 class="text-danger" align="left">Datos del Cliente</h6>
         <br>
-        {% for v in v %}
+      {% for v in v %}
         <div class="row">
           <div class="col-md-4 col-sm-12">
             <div class="form-group">
@@ -66,13 +66,12 @@
             </div>
           </div>
         </div>
-        {% endfor %}
+      {% endfor %}
         <br>
         <h6 class="text-danger" align="left">Datos de la Venta</h6>
         <br>
-        {% for n in n %}
+      {% for n in n %}
         <div class="row">
-
           <div class="col-md-4 col-sm-12">
             <div class="form-group">
               <label># de Venta</label>
@@ -92,56 +91,38 @@
               <label>Total de Venta</label>
               <input type="text" class="form-control" name="total" readonly value="{{t.tot}}">
             </div>
-          </div>
-              
+          </div> 
           
         </div>
-        {% endfor %}
+      {% endfor %}
 
         <br>
         <h6 class="text-danger" align="left">Detalle de la Venta</h6>
         <br>
 
-        {% for d in d %}
-        <div class="row">
-          
-          <div class="col-md-2 col-sm-12">
-            <div class="form-group">
-              <label># de Venta</label>
-              <input type="text" class="form-control" readonly value="{{d.venta}}">
-            </div>
-          </div>
-          
-          <div class="col-md-2 col-sm-12">
-            <div class="form-group">
-              <label>Codigo de Articulo</label>
-              <input type="text" class="form-control" readonly value="{{d.codigo}}">
-            </div>
-          </div>
-          
-          <div class="col-md-2 col-sm-12">
-            <div class="form-group">
-              <label>Precio Unitario</label>
-              <input type="text" class="form-control" readonly value="{{d.precio}}">
-            </div>
-          </div>
-          
-          <div class="col-md-2 col-sm-12">
-            <div class="form-group">
-              <label>Cantidad</label>
-              <input type="text" class="form-control" readonly value="{{d.cantidad}}">
-            </div>
-          </div>
-          
-          <div class="col-md-2 col-sm-12">
-            <div class="form-group">
-              <label>Total</label>
-              <input type="text" class="form-control" readonly value="{{d.total}}">
-            </div>
-            
-        </div>
 
-        {% endfor %}
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col"># Venta</th>
+            <th scope="col">Codigo Articulo</th>
+            <th scope="col">Precio Unitario</th>
+            <th scope="col">Cantidad</th>
+            <th scope="col">Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for d in d %}
+          <tr>
+            <th scope="row"><input type="text" class="form-control" readonly value="{{d.venta}}"></th>
+            <td><input type="text" class="form-control" readonly value="{{d.codigo}}"></td>
+            <td><input type="text" class="form-control" readonly value="{{d.precio}}"></td>
+            <td><input type="text" class="form-control" readonly value="{{d.cantidad}}"></td>
+            <td><input type="text" class="form-control" readonly value="{{d.total}}"></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
         
         <div class="col-md-12 col-sm-12">
           <div class="form-group">
