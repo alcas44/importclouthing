@@ -1,9 +1,9 @@
 from cgi import print_arguments
 from decimal import Decimal
 from django.shortcuts import render,redirect
-from IngresosApp.models import Clientes,Envios,EnviosCheque
+from IngresosApp.models import Clientes,Envios,EnviosCheque, EnviosTarjeta,EnviosDeposito
 from VentaApp.models import DatosVenta,Detalle
-from PagoApp.models import PagoCheque, PagoEfectivo
+from PagoApp.models import PagoCheque, PagoEfectivo,PagoTarjeta,PagoDeposito
 from django.contrib import messages
 from django.db.models import Sum
 import random
@@ -55,10 +55,30 @@ def pago(request,id,n):
                 return redirect('Cheque',v,venta,n,p,tp)
             #fin pago cheque
 
+            #pago tarjeta
             elif request.POST["tipo"] == "Tarjeta":
-                pass
+                a = random.sample(range(1000000), 10)
+                p = random.randint(1,10)
+                v = a[-p]
+                venta = request.POST["venta"]
+                n = request.POST["nit"]
+                p = request.POST["total"]
+                tp = request.POST["tipo"]
+                return redirect('Tarjeta',v,venta,n,p,tp)
+            #fin pago tarjeta
+
+            #pago deposito
             elif request.POST["tipo"] == "Deposito":
-                pass
+                a = random.sample(range(1000000), 10)
+                p = random.randint(1,10)
+                v = a[-p]
+                venta = request.POST["venta"]
+                n = request.POST["nit"]
+                p = request.POST["total"]
+                tp = request.POST["tipo"]
+                return redirect('Deposito',v,venta,n,p,tp)
+            #fin pago deposito
+
             elif request.POST["tipo"] == "Dolares":
                 pass  
         else:
@@ -108,11 +128,86 @@ def cheque(request,v,vn,n,t,tp):
 
 
 
-def chequeok(request,v,vn,n):
+def tarjeta(request,v,vn,n,t,tp):
     if not request.user.is_authenticated and not request.user.is_active and request.user.rol == 'admin':
         return redirect('/')
     else:
-        return render(request,"PagoApp/chequeok.html",{'v':v,'n':n,'vn':vn})
+         if request.method == "POST":
+            pc = PagoTarjeta()
+            pc.venta = vn
+            pc.nit = n
+            pc.fecha = date.today()
+            pc.numero_tarjeta = request.POST["numero"]
+            pc.tipo_pago = request.POST["tipo"]
+            pc.tipo_tarjeta = request.POST["tipo_tarjeta"]
+            pc.banco = request.POST["banco"]
+            pc.autorizacion = request.POST["autorizacion"]
+            pc.total_venta = request.POST["total"]
+            pc.verificador = v
+            pc.estado = 1
+            pc.usuario = request.user.username
+            pc.fecha_sistema = date.today()
+            pc.observaciones = request.POST["obs"]
+            pc.save()
+            messages.success(request, 'Pago con Tarjeta Ingresado Exitosamente! ¡¡Guarde el Numero de Verificador y Numero Venta!!')
+            return redirect('TarjetaOk',v,vn,n)
+
+    return render(request,"PagoApp/tarjeta.html",{'v':v,'vn':vn,'n':n,'t':t,'tp':tp})
+
+
+
+
+def deposito(request,v,vn,n,t,tp):
+    if not request.user.is_authenticated and not request.user.is_active and request.user.rol == 'admin':
+        return redirect('/')
+    else:
+         if request.method == "POST":
+            pc = PagoDeposito()
+            pc.venta = vn
+            pc.nit = n
+            pc.fecha = date.today()
+            pc.tipo_pago = request.POST["tipo"]
+            pc.numero_boleta = request.POST["numero"]
+            pc.banco = request.POST["banco"]
+            pc.monto_deposito = request.POST["monto"]
+            pc.fecha_deposito = request.POST["fechadepo"]
+            pc.total_venta = request.POST["total"] 
+            pc.verificador = v
+            pc.observaciones = request.POST["obs"]
+            pc.estado = 1
+            pc.usuario = request.user.username
+            pc.fecha_sistema = date.today()
+            pc.save()
+            messages.success(request, 'Pago con Deposito Ingresado Exitosamente! ¡¡Guarde el Numero de Verificador y Numero Venta!!')
+            return redirect('DepositoOk',v,vn,n)
+
+    return render(request,"PagoApp/deposito.html",{'v':v,'vn':vn,'n':n,'t':t,'tp':tp})
+
+
+
+
+def chequeok(request,v,vn,n,t):
+    if not request.user.is_authenticated and not request.user.is_active and request.user.rol == 'admin':
+        return redirect('/')
+    else:
+        return render(request,"PagoApp/chequeok.html",{'v':v,'n':n,'vn':vn,'t':t})
+
+
+
+def tarjetaok(request,v,vn,n):
+    if not request.user.is_authenticated and not request.user.is_active and request.user.rol == 'admin':
+        return redirect('/')
+    else:
+        return render(request,"PagoApp/tarjetaok.html",{'v':v,'n':n,'vn':vn})  
+
+
+
+def depositok(request,v,vn,n):
+    if not request.user.is_authenticated and not request.user.is_active and request.user.rol == 'admin':
+        return redirect('/')
+    else:
+        return render(request,"PagoApp/depositok.html",{'v':v,'n':n,'vn':vn})
+
 
 
 
@@ -202,6 +297,96 @@ def envioscheque(request,v,n):
 
     return render(request,"PagoApp/enviocheque.html",{'v':v,'cl':cliente,'c':cheque})
 
+
+
+
+
+
+def enviostarjeta(request,v,n):
+    if not request.user.is_authenticated and not request.user.is_active and request.user.rol == 'admin':
+        return redirect('/')
+    else:
+        #print(e.venta,e.nit,e.fecha,e.total_venta,e.tipo_pago,e.total_pago,e.verificador,e.usuario,e.fecha_sistema)
+
+        #datos del cliente
+        cliente = Clientes.objects.filter(nit=n)
+        #datos del pago en efectivo
+        tarjeta = PagoTarjeta.objects.filter(nit=n,verificador=v)
+        
+
+        if request.method == "POST":
+            e = EnviosTarjeta()
+            e.verificador = request.POST["verificador"]
+            e.remitente = request.POST["remitente"]
+            e.direccion_remitente = request.POST["dir_remitente"]
+            e.telefono_remitente = request.POST["tel_remitente"]
+            e.destinatario = request.POST["destinatario"]
+            e.nit = request.POST["nit"]
+            e.direccion =  request.POST["direccion"]
+            e.telefono = request.POST["tel"]
+            e.venta = request.POST["venta"]
+            e.tipo = request.POST["tipo"]
+            e.numero_tarjeta = request.POST["numerot"]
+            e.banco = request.POST["banco"]
+            e.total = request.POST["totalventa"]
+            e.autorizacion = request.POST["autorizacion"]
+            e.observacion = request.POST["obs"]
+            e.estado = 1
+            e.usuario = request.user.username
+            e.created = date.today()
+            e.updated = date.today()
+            e.save()
+            messages.success(request, 'Ingreso de Envio Exitoso!')
+            return redirect('IniciarVenta') 
+        
+
+
+    return render(request,"PagoApp/enviotarjeta.html",{'v':v,'cl':cliente,'t':tarjeta})
+
+
+
+
+
+def enviosdeposito(request,v,n):
+    if not request.user.is_authenticated and not request.user.is_active and request.user.rol == 'admin':
+        return redirect('/')
+    else:
+        #print(e.venta,e.nit,e.fecha,e.total_venta,e.tipo_pago,e.total_pago,e.verificador,e.usuario,e.fecha_sistema)
+
+        #datos del cliente
+        cliente = Clientes.objects.filter(nit=n)
+        #datos del pago en efectivo
+        deposito = PagoDeposito.objects.filter(nit=n,verificador=v)
+        
+
+        if request.method == "POST":
+            e = EnviosDeposito()
+            e.verificador = request.POST["verificador"]
+            e.remitente = request.POST["remitente"]
+            e.direccion_remitente = request.POST["dir_remitente"]
+            e.telefono_remitente = request.POST["tel_remitente"]
+            e.destinatario = request.POST["destinatario"]
+            e.nit = request.POST["nit"]
+            e.direccion =  request.POST["direccion"]
+            e.telefono = request.POST["tel"]
+            e.venta = request.POST["venta"]
+            e.tipo = request.POST["tipo"]
+            e.numero_boleta = request.POST["numerob"]
+            e.banco = request.POST["banco"]
+            e.monto_deposito = request.POST["monto"]
+            e.total_venta = request.POST["totalventa"]
+            e.observacion = request.POST["obs"]
+            e.estado = 1
+            e.usuario = request.user.username
+            e.created = date.today()
+            e.updated = date.today()
+            e.save()
+            messages.success(request, 'Ingreso de Envio Exitoso!')
+            return redirect('IniciarVenta') 
+        
+
+
+    return render(request,"PagoApp/enviodeposito.html",{'v':v,'cl':cliente,'d':deposito})
 
 
 

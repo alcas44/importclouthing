@@ -1,0 +1,102 @@
+{% extends 'BaseApp/base.html' %}
+{% load static %}
+
+{% block content %}
+<h4>Deposito Bancario</h4>
+<div class="pd-20 card-box mb-30">
+    <form action="" method="POST">{% csrf_token %}
+        
+        <div class="row">
+            <div class="col-md-3 col-sm-12">
+                <div class="form-group">
+                    <label>Verificador de Deposito</label>
+                    <input class="form-control" readonly value="{{v}}" name="verificador" type="text">
+                </div>                          
+            </div>
+            <div class="col-md-3 col-sm-12">
+                <div class="form-group">
+                    <label># de Venta</label>
+                    <input class="form-control" readonly value="{{vn}}" name="venta" type="text">
+                </div>                          
+            </div>
+            <div class="col-md-3 col-sm-12">
+                <div class="form-group">
+                    <label>Nit de Cliente</label>
+                    <input class="form-control" readonly value="{{n}}" name="nit" type="text">
+                </div>                          
+            </div>
+            <div class="col-md-3 col-sm-12">
+                <div class="form-group">
+                    <label>Fecha</label>
+                    <input class="form-control" readonly value="{% now 'd-m-Y' %}" name="fecha" type="text">
+                </div>                          
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3 col-sm-12">
+                <div class="form-group">
+                    <label>Numero de Boleta</label>
+                    <input class="form-control" name="numero" type="number" required autofocus="numero" placeholder="Numero de Boleta">
+                </div>                          
+            </div>
+            <div class="col-md-3 col-sm-12">
+                <div class="form-group">
+                    <label>Banco</label>
+                    <select name="banco" class="form-control" editable="false" required>
+                        <option value="BAM">BAM</option>
+                        <option value="BAC CREDOMATIC">BAC CREDOMATIC</option>
+                        <option value="BANRURAL">BANRURAL</option>
+                        <option value="CREDITO HIPOTECARIO">CREDITO HIPOTECARIO</option>
+                        <option value="INDUSTRIAL">INDUSTRIAL</option>
+                        <option value="BANTRAB">BANTRAB</option>
+                        <option value="G&T CONTINETAL">G&T CONTINETAL</option>
+                        <option value="INTERNACIONAL">INTERNACIONAL</option>
+                        <option value="BANCO DE ANTIGUA">BANCO DE ANTIGUA</option>
+                        <option value="BANCO DE AZTECA">BANCO DE AZTECA</option>
+                    </select>
+                </div>                          
+            </div>
+            <div class="col-md-3 col-sm-12">
+                <div class="form-group">
+                    <label>Monto de Deposito</label>
+                    <input class="form-control" name="monto" required type="number" required placeholder="Monto de Deposito">
+                </div>                          
+            </div>
+            <div class="col-md-3 col-sm-12">
+                <div class="form-group">
+                    <label>Fecha de Deposito</label>
+                    <input class="form-control" name="fechadepo" required type="date" required">
+                </div>                          
+            </div>
+
+
+        </div>
+
+        <div class="row">
+            <div class="col-md-4 col-sm-12">
+                <div class="form-group">
+                    <label>Tipo Pago</label>
+                    <input class="form-control" name="tipo" value="{{tp}}" type="text" readonly>
+                </div>                          
+            </div>
+            <div class="col-md-4 col-sm-12">
+                <div class="form-group">
+                    <label>Total de la Venta</label>
+                    <input class="form-control" name="total" readonly required value="{{t}}" type="text" placeholder="Total de la venta">
+                </div>                          
+            </div>
+            <div class="col-md-4 col-sm-12">
+                <div class="form-group">
+                    <label>Observaciones</label>
+                    <input class="form-control" name="obs" required type="text" placeholder="Observaciones">
+                </div>                          
+            </div>
+        </div>
+        <div class="container" align="center">
+            <button type="submit" class="btn btn-primary">Ingresar</button>
+        </div>
+
+    </form>
+</div>
+{% endblock %}

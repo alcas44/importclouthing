@@ -1,0 +1,105 @@
+{% extends 'BaseApp/base.html' %}
+{% load static %}
+
+{% block content %}
+<h4>Tarjeta</h4>
+<div class="pd-20 card-box mb-30">
+    <form action="" method="POST">{% csrf_token %}
+        
+        <div class="row">
+            <div class="col-md-3 col-sm-12">
+                <div class="form-group">
+                    <label>Verificador de Pago Tarjeta</label>
+                    <input class="form-control" readonly value="{{v}}" name="verificador" type="text">
+                </div>                          
+            </div>
+            <div class="col-md-3 col-sm-12">
+                <div class="form-group">
+                    <label># de Venta</label>
+                    <input class="form-control" readonly value="{{vn}}" name="venta" type="text">
+                </div>                          
+            </div>
+            <div class="col-md-3 col-sm-12">
+                <div class="form-group">
+                    <label>Nit de Cliente</label>
+                    <input class="form-control" readonly value="{{n}}" name="nit" type="text">
+                </div>                          
+            </div>
+            <div class="col-md-3 col-sm-12">
+                <div class="form-group">
+                    <label>Fecha</label>
+                    <input class="form-control" readonly value="{% now 'd-m-Y' %}" name="fecha" type="text">
+                </div>                          
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3 col-sm-12">
+                <div class="form-group">
+                    <label>Tipo Pago</label>
+                    <input class="form-control" readonly name="tipo" type="text" value="{{tp}}">
+                </div>                          
+            </div>
+            <div class="col-md-3 col-sm-12">
+                <div class="form-group">
+                    <label>Tipo de Tarjeta</label>
+                    <select name="tipo_tarjeta" class="form-control" editable="false" required>
+                        <option value="VISA">VISA</option>
+                        <option value="MASTERCARD">MASTERCARD</option>
+                        <option value="AMERICANEXPRESS">AMERICANEXPRESS</option>            
+                    </select>
+                </div>                          
+            </div>
+            <div class="col-md-3 col-sm-12">
+                <div class="form-group">
+                    <label>Numero de Tarjeta</label>
+                    <input class="form-control" maxlength="16" minlength="1" name="numero" type="number" required autofocus="numero" placeholder="Numero de Tarjeta">
+                </div>                          
+            </div>
+            <div class="col-md-3 col-sm-12">
+                <div class="form-group">
+                    <label>Banco</label>
+                    <select name="banco" class="form-control" editable="false" required>
+                        <option value="BAM">BAM</option>
+                        <option value="BAC CREDOMATIC">BAC CREDOMATIC</option>
+                        <option value="BANRURAL">BANRURAL</option>
+                        <option value="CREDITO HIPOTECARIO">CREDITO HIPOTECARIO</option>
+                        <option value="INDUSTRIAL">INDUSTRIAL</option>
+                        <option value="BANTRAB">BANTRAB</option>
+                        <option value="G&T CONTINETAL">G&T CONTINETAL</option>
+                        <option value="INTERNACIONAL">INTERNACIONAL</option>
+                        <option value="BANCO DE ANTIGUA">BANCO DE ANTIGUA</option>
+                        <option value="BANCO DE AZTECA">BANCO DE AZTECA</option>
+                    </select>
+                </div>                          
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3 col-sm-12">
+                <div class="form-group">
+                    <label>Monto a Cobrar</label>
+                    <input class="form-control" readonly value="{{t}}" name="total" required type="number" required placeholder="Monto a Cobrar">
+                </div>                          
+            </div>
+            <div class="col-md-3 col-sm-12">
+                <div class="form-group">
+                    <label>Autorizacion</label>
+                    <input class="form-control" name="autorizacion" required type="text" placeholder="Numero de Autorizacion">
+                </div>                          
+            </div>
+            <div class="col-md-4 col-sm-12">
+                <div class="form-group">
+                    <label>Observaciones</label>
+                    <input class="form-control" name="obs" type="text" placeholder="Observaciones">
+                </div>                          
+            </div>
+           
+        </div>
+        <div class="container" align="center">
+            <button type="submit" class="btn btn-primary">Ingresar</button>
+        </div>
+
+    </form>
+</div>
+{% endblock %}
