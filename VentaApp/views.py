@@ -87,7 +87,7 @@ def venta(request,id,n):
             else:
                 stock = Articulos.objects.filter(codigo=request.POST["codigo"])
                 for s in stock:
-                    if s.existencia <= int(request.POST["cantidad"]):
+                    if s.existencia < int(request.POST["cantidad"]):
                         messages.error(request, 'Cantidad NO Puede Ser Mayor a la Existencia!.')
                         return redirect('Venta',id,n)
                     else:

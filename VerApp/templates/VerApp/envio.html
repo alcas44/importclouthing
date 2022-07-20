@@ -54,11 +54,11 @@
                                     </thead>
                                     <tbody>
                                      {% for d in d %}
-                                      <tr>
+                                      <tr align="center">
                                         <th scope="row">{{ d.codigo }}</th>
                                         <td>{{ d.cantidad }}</td>
-                                        <td>{{ d.precio }}</td>
-                                        <td>{{ d.total }}</td>
+                                        <td>Q.{{ d.precio }}</td>
+                                        <td>Q.{{ d.total }}</td>
                                       </tr>
                                       {% endfor %}
                                     </tbody>

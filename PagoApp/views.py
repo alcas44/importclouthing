@@ -2,7 +2,7 @@ from cgi import print_arguments
 from django.shortcuts import render,redirect
 from IngresosApp.models import Clientes,Envios
 from VentaApp.models import DatosVenta,Detalle
-from PagoApp.models import PagoEfectivo
+from PagoApp.models import PagoCheque, PagoEfectivo
 from django.contrib import messages
 from django.db.models import Sum
 import random
@@ -23,8 +23,8 @@ def pago(request,id,n):
         t = Detalle.objects.filter(venta=id).aggregate(tot=Sum('total'))
         
         if request.method == "POST":
+            #viene de Pago
             if request.POST["tipo"] == "Efectivo":               
-                    
                     a = random.sample(range(1000000), 10)
                     p = random.randint(1,10)
                     v = a[-p]
@@ -40,11 +40,16 @@ def pago(request,id,n):
                     e.fecha_sistema = date.today()
                     e.save()
                     messages.success(request, 'Pago Efectuado Exitosamente! ¡¡Guarde el Numero de Verificador!!')
-                    return redirect('Efectivo',e.verificador,e.nit) 
-                     
-
+                    return redirect('Efectivo',e.verificador,e.nit)         
             elif request.POST["tipo"] == "Cheque":
-                pass
+                a = random.sample(range(1000000), 10)
+                p = random.randint(1,10)
+                v = a[-p]
+                venta = request.POST["venta"]
+                n = request.POST["nit"]
+                p = request.POST["total"]
+                tp = request.POST["tipo"]
+                return redirect('Cheque',v,venta,n,p,tp)
             elif request.POST["tipo"] == "Tarjeta":
                 pass
             elif request.POST["tipo"] == "Deposito":
@@ -67,6 +72,14 @@ def efectivo(request,v,n):
         return redirect('/')
     else:
         return render(request,"PagoApp/efectivo.html",{'v':v,'n':n})
+
+
+
+def cheque(request,v,vn,n,t,tp):
+    if not request.user.is_authenticated and not request.user.is_active and request.user.rol == 'admin':
+        return redirect('/')
+    else:
+        return render(request,"PagoApp/cheque.html",{'v':v,'vn':vn,'n':n,'t':t,'tp':tp})
 
 
 
