@@ -169,9 +169,7 @@ def envioscheque(request,v,n):
         cliente = Clientes.objects.filter(nit=n)
         #datos del pago en efectivo
         cheque = PagoCheque.objects.filter(nit=n,verificador=v)
-        for c in cheque:
-            r = c.monto-c.abono
-            print(r)
+        
 
         if request.method == "POST":
             e = EnviosCheque()
@@ -190,7 +188,7 @@ def envioscheque(request,v,n):
             e.fecha_cheque = request.POST["fechacheque"]
             e.total = request.POST["totalcheque"]
             e.abono = request.POST["abono"]
-            e.restante = Decimal(request.POST["totalcheque"])-Decimal(request.POST["abono"])
+            e.restante = Decimal(request.POST["totalventa"])-(Decimal(request.POST["totalcheque"])+Decimal(request.POST["abono"]))
             e.observacion = request.POST["obs"]
             e.estado = 1
             e.usuario = request.user.username
@@ -202,7 +200,7 @@ def envioscheque(request,v,n):
         
 
 
-    return render(request,"PagoApp/enviocheque.html",{'v':v,'cl':cliente,'c':cheque,'r':r})
+    return render(request,"PagoApp/enviocheque.html",{'v':v,'cl':cliente,'c':cheque})
 
 
 
