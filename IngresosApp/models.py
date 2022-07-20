@@ -84,3 +84,36 @@ class Envios(models.Model):
 
     def __str__(self):
         return self.verificador #como va a aparecer en el panel admin   
+
+
+
+
+class EnviosCheque(models.Model):
+    verificador=models.IntegerField(primary_key=True,blank=False,null=False)
+    remitente=models.CharField(max_length=250,blank=False)
+    direccion_remitente=models.CharField(max_length=250,blank=False)
+    telefono_remitente=models.CharField(max_length=9,blank=False)
+    destinatario=models.CharField(max_length=250,blank=False)
+    nit=models.CharField(max_length=14,blank=False)
+    direccion=models.CharField(max_length=500,blank=False)
+    telefono=models.CharField(max_length=9,blank=False)
+    venta=models.CharField(max_length=100,blank=False)
+    tipo=models.CharField(max_length=75,blank=False)
+    numero_cheque=models.IntegerField(blank=False)
+    banco=models.CharField(max_length=250,blank=False)
+    fecha_cheque=models.CharField(max_length=75,blank=False)
+    total=models.DecimalField(max_digits=10,decimal_places=2, blank=False)
+    abono=models.DecimalField(max_digits=10,decimal_places=2, blank=False)
+    restante=models.DecimalField(max_digits=10,decimal_places=2, blank=False)
+    observacion=models.CharField(max_length=500,blank=True)
+    estado=models.CharField(max_length=75,blank=False)
+    usuario=models.CharField(max_length=200,blank=False)
+    created=models.DateTimeField(auto_now_add=True)
+    updated=models.DateTimeField(auto_now_add=True)
+
+    class Meta:#nombre que tendran en singular y plural
+        verbose_name="enviocheque"
+        verbose_name_plural="enviocheques"
+
+    def __str__(self):
+        return self.verificador #como va a aparecer en el panel admin 

@@ -4,7 +4,7 @@
 {% block content %}
 <h4>Cheque</h4>
 <div class="pd-20 card-box mb-30">
-    <form action="" method="POST">
+    <form action="" method="POST">{% csrf_token %}
         
         <div class="row">
             <div class="col-md-3 col-sm-12">
