@@ -16,9 +16,13 @@ urlpatterns = [
     path('deposito/<int:v>/<int:vn>/<str:n>/<str:t>/<str:tp>',views.deposito,name="Deposito"),
     path('deposito/<int:v>/<int:vn>/<str:n>',views.depositok,name="DepositoOk"),
 
+    path('notacredito/<int:v>/<int:vn>/<str:n>/<str:t>/<str:tp>',views.notacredito,name="NotaCredito"),
+    path('notacredito/<int:v>/<int:vn>/<str:n>/<str:nota>',views.notacreditok,name="NotaCreditoOk"),
+
     path('envios/<int:v>/<str:n>',views.envios,name="Envios"),
     path('envio/<int:v>/<str:n>',views.envioscheque,name="Envios2"),
     path('enviot/<int:v>/<str:n>',views.enviostarjeta,name="Envios3"),
     path('enviodepo/<int:v>/<str:n>',views.enviosdeposito,name="EnviosDepo"),
+    path('enviocredito/<int:v>/<str:n>/<str:nota>',views.enviosnotacredito,name="EnviosNota"),
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

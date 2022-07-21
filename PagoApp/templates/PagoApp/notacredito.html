@@ -1,0 +1,79 @@
+{% extends 'BaseApp/base.html' %}
+{% load static %}
+
+{% block content %}
+<h4>Nota de Credito</h4>
+<div class="pd-20 card-box mb-30">
+    <form action="" method="POST">{% csrf_token %}
+        
+        <div class="row">
+            <div class="col-md-3 col-sm-12">
+                <div class="form-group">
+                    <label>Verificador de Credito</label>
+                    <input class="form-control" readonly value="{{v}}" name="verificador" type="text">
+                </div>                          
+            </div>
+            <div class="col-md-3 col-sm-12">
+                <div class="form-group">
+                    <label>Numero Nota de Credito</label>
+                    <input class="form-control" readonly value="{{v}}-{{vn}}" name="nota" type="text">
+                </div>                          
+            </div>
+            <div class="col-md-3 col-sm-12">
+                <div class="form-group">
+                    <label># de Venta</label>
+                    <input class="form-control" readonly value="{{vn}}" name="venta" type="text">
+                </div>                          
+            </div>
+            <div class="col-md-3 col-sm-12">
+                <div class="form-group">
+                    <label>Nit de Cliente</label>
+                    <input class="form-control" readonly value="{{n}}" name="nit" type="text">
+                </div>                          
+            </div>
+            <div class="col-md-4 col-sm-12">
+                <div class="form-group">
+                    <label>Fecha</label>
+                    <input class="form-control" readonly value="{% now 'd-m-Y' %}" name="fecha" type="text">
+                </div>                          
+            </div>
+            <div class="col-md-4 col-sm-12">
+                <div class="form-group">
+                    <label>Tipo de Pago</label>
+                    <input class="form-control" readonly value="{{tp}}" name="tipo" type="text">
+                </div>                          
+            </div>
+            <div class="col-md-4 col-sm-12">
+                <div class="form-group">
+                    <label>Total Venta</label>
+                    <input class="form-control" readonly value="{{t}}" name="total" type="text">
+                </div>                          
+            </div>
+            <div class="col-md-4 col-sm-12">
+                <div class="form-group">
+                    <label>Fecha Inicio Credito</label>
+                    <input class="form-control" readonly value="{% now 'd-m-Y' %}" name="inicio" type="text">
+                </div>                          
+            </div>
+            <div class="col-md-4 col-sm-12">
+                <div class="form-group">
+                    <label>Fecha Fin Credito</label>
+                    <input class="form-control" autofocus="fin" required name="fin" type="date">
+                </div>                          
+            </div>
+            <div class="col-md-4 col-sm-12">
+                <div class="form-group">
+                    <label>Observaciones</label>
+                    <input class="form-control" required name="obs" type="text">
+                </div>                          
+            </div>
+        </div>
+
+      
+        <div class="container" align="center">
+            <button type="submit" class="btn btn-primary">Ingresar</button>
+        </div>
+
+    </form>
+</div>
+{% endblock %}

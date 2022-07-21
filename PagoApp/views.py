@@ -1,9 +1,9 @@
 from cgi import print_arguments
 from decimal import Decimal
 from django.shortcuts import render,redirect
-from IngresosApp.models import Clientes,Envios,EnviosCheque, EnviosTarjeta,EnviosDeposito
+from IngresosApp.models import Clientes,Envios,EnviosCheque, EnviosNotaCredito, EnviosTarjeta,EnviosDeposito
 from VentaApp.models import DatosVenta,Detalle
-from PagoApp.models import PagoCheque, PagoEfectivo,PagoTarjeta,PagoDeposito
+from PagoApp.models import NotaCredito, PagoCheque, PagoEfectivo,PagoTarjeta,PagoDeposito
 from django.contrib import messages
 from django.db.models import Sum
 import random
@@ -79,8 +79,17 @@ def pago(request,id,n):
                 return redirect('Deposito',v,venta,n,p,tp)
             #fin pago deposito
 
-            elif request.POST["tipo"] == "Dolares":
-                pass  
+            #pago notacredito
+            elif request.POST["tipo"] == "Credito":
+                a = random.sample(range(1000000), 10)
+                p = random.randint(1,10)
+                v = a[-p]
+                venta = request.POST["venta"]
+                n = request.POST["nit"]
+                p = request.POST["total"]
+                tp = request.POST["tipo"]
+                return redirect('NotaCredito',v,venta,n,p,tp)
+            #fin pago notacredito  
         else:
             pass
              #messages.error(request, 'Error al Almacenar Forma de Pago!')
@@ -186,6 +195,34 @@ def deposito(request,v,vn,n,t,tp):
 
 
 
+
+def notacredito(request,v,vn,n,t,tp):
+    if not request.user.is_authenticated and not request.user.is_active and request.user.rol == 'admin':
+        return redirect('/')
+    else:
+         if request.method == "POST":
+            pc = NotaCredito()
+            pc.venta = vn
+            pc.nit = n
+            pc.fecha = date.today()
+            pc.tipo_pago = request.POST["tipo"]
+            pc.numero_credito = request.POST["nota"]
+            pc.fecha_inicio = request.POST["inicio"]
+            pc.fecha_fin = request.POST["fin"].strftime("%d-%m-%Y")
+            pc.total_venta = request.POST["total"] 
+            pc.verificador = v
+            pc.observaciones = request.POST["obs"]
+            pc.estado = 0 #pasara a 1 cuando cancele todo
+            pc.usuario = request.user.username
+            pc.fecha_sistema = date.today()
+            pc.save()
+            messages.success(request, 'Nota de Credito Ingresado Exitosamente! ¡¡Guarde el Numero de Verificador y Numero Venta!!')
+            return redirect('NotaCreditoOk',v,vn,n,request.POST["nota"])
+
+    return render(request,"PagoApp/notacredito.html",{'v':v,'vn':vn,'n':n,'t':t,'tp':tp})
+
+
+
 def chequeok(request,v,vn,n,t):
     if not request.user.is_authenticated and not request.user.is_active and request.user.rol == 'admin':
         return redirect('/')
@@ -207,6 +244,14 @@ def depositok(request,v,vn,n):
         return redirect('/')
     else:
         return render(request,"PagoApp/depositok.html",{'v':v,'n':n,'vn':vn})
+
+
+
+def notacreditok(request,v,vn,n,nota):
+    if not request.user.is_authenticated and not request.user.is_active and request.user.rol == 'admin':
+        return redirect('/')
+    else:
+        return render(request,"PagoApp/notacreditok.html",{'v':v,'n':n,'vn':vn,'nota':nota})
 
 
 
@@ -387,6 +432,51 @@ def enviosdeposito(request,v,n):
 
 
     return render(request,"PagoApp/enviodeposito.html",{'v':v,'cl':cliente,'d':deposito})
+
+
+
+
+
+def enviosnotacredito(request,v,n,nota):
+    if not request.user.is_authenticated and not request.user.is_active and request.user.rol == 'admin':
+        return redirect('/')
+    else:
+        #print(e.venta,e.nit,e.fecha,e.total_venta,e.tipo_pago,e.total_pago,e.verificador,e.usuario,e.fecha_sistema)
+
+        #datos del cliente
+        cliente = Clientes.objects.filter(nit=n)
+        #datos del pago en efectivo
+        notac = NotaCredito.objects.filter(nit=n,verificador=v)
+        
+
+        if request.method == "POST":
+            e = EnviosNotaCredito()
+            e.verificador = request.POST["verificador"]
+            e.notacredito = nota
+            e.remitente = request.POST["remitente"]
+            e.direccion_remitente = request.POST["dir_remitente"]
+            e.telefono_remitente = request.POST["tel_remitente"]
+            e.destinatario = request.POST["destinatario"]
+            e.nit = request.POST["nit"]
+            e.direccion =  request.POST["direccion"]
+            e.telefono = request.POST["tel"]
+            e.venta = request.POST["venta"]
+            e.tipo = request.POST["tipo"]
+            e.total_venta = request.POST["totalventa"]
+            e.fecha_inicio = request.POST["inicio"]
+            e.fecha_fin = request.POST["fin"]
+            e.observacion = request.POST["obs"]
+            e.estado = 1 #paquete enviado
+            e.usuario = request.user.username
+            e.created = date.today()
+            e.updated = date.today()
+            e.save()
+            messages.success(request, 'Ingreso de Envio Exitoso!')
+            return redirect('IniciarVenta') 
+        
+
+
+    return render(request,"PagoApp/enviocredito.html",{'v':v,'cl':cliente,'n':notac})
 
 
 

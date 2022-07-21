@@ -103,3 +103,32 @@ class PagoDeposito(models.Model):
 
     def __str__(self):
         return str(self.venta) #como va a aparecer en el panel admin
+
+
+
+
+
+
+
+
+class NotaCredito(models.Model):
+    venta = models.BigIntegerField(primary_key=True,null=False)
+    nit = models.CharField(max_length=14,blank=False,null=False)
+    fecha = models.CharField(max_length=25,blank=False,null=False)
+    tipo_pago = models.CharField(max_length=75,blank=False,null=False)
+    numero_credito = models.CharField(max_length=25,blank=False,null=False)
+    fecha_inicio = models.CharField(max_length=25,blank=False,null=False)
+    fecha_fin = models.CharField(max_length=25,blank=False,null=False)
+    total_venta = models.DecimalField(max_digits=10,decimal_places=2,blank=False)
+    verificador = models.IntegerField()
+    observaciones = models.CharField(max_length=250,blank=False)
+    estado = models.IntegerField(blank=False,null=False)
+    usuario = models.CharField(max_length=200,blank=False)
+    fecha_sistema = models.DateTimeField(blank=False,null=False)
+
+    class Meta:#nombre que tendran en singular y plural
+        verbose_name="notadecredito"
+        verbose_name_plural="notadecreditos"
+
+    def __str__(self):
+        return self.numero_credito #como va a aparecer en el panel admin
