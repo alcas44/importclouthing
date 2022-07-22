@@ -1,0 +1,78 @@
+{% extends 'BaseApp/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="card-box mb-30">
+    <div class="pd-30">
+        <h4 class="text-info h4">Reporte de Compras Con Nota de Credito <br><strong class="text-danger">{{cl.negocio}}</strong></h4>
+        <a href="{% url 'InventarioClientes' %}" type="button"><span class="badge bg-success text-white">Regresar</span></a>
+        <br><br>
+        <input type="text" class="form-control" id="filtrar" placeholder="Filtrar Por # Venta" name="f" autofocus="f" />
+    </div>
+    <div class="pb-20">
+        <table class="table table-hover table-responsive-lg">
+            <thead>
+                <tr>
+                    <th># Venta</th>
+                    <th>Tipo de Pago</th>
+                    <th>Fecha de Venta</th>
+                    <th>Numero de Nota Credito</th>
+                    <th>Fecha Inicio Nota Credito</th>
+                    <th>Fecha Fin Nota Credito</th>
+                    <th>Total Venta</th>
+                    <th>Verificador</th>
+                    <th>Observaciones</th>
+                </tr>
+            </thead>
+            <tbody id="nombres">
+                {% for v in ver %}
+                <tr>
+                    <td>{{ v.venta }}</td>
+                    <td>{{ v.tipo_pago }}</td>
+                    <td>{{v.fecha}}</td>
+                    <td>{{v.numero_credito}}</td>
+                    <td>{{v.fecha_inicio}}</td>
+                    <td>{{v.fecha_fin}}</td>
+                    <td>Q.{{v.total_venta}}</td>
+                    <td>{{v.verificador}}</td>
+                    <td>{{v.observaciones}}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <p align="center" class="text-danger">No Se Encontraron Compras</p>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script >
+    function filtro() {
+      // Accede al texto de entrada y a varios elementos del DOM
+      let valor = document.getElementById("filtrar").value.toUpperCase();
+      let nombres = document.getElementById("nombres");
+      let filas = nombres.getElementsByTagName("tr");
+    
+      // Iteramos el arreglo de filas
+      for(let i = 0; i < filas.length; i++){
+        // Por cada fila se obtiene la referencia a la columna venta
+        let columnaLenguaje = filas[i].getElementsByTagName("td")[0];
+        console.log(columnaLenguaje);
+        // Se extrae el texto de la columna referencia
+        let lenguaje = columnaLenguaje.textContent;
+        // Se muestra u oculta la fila si la entrada de texto
+        // coincide con el texto de la columna lenguaje
+        filas[i].style.display = lenguaje.toUpperCase().indexOf(valor) > -1 ? "" : "none";
+      }
+    }
+    
+    // Se agrega un escuchador de eventos a la entrada de texto
+    // para activar la función de filtrado cada vez que el usuario
+    // ingresa texto en la entrada
+    document.getElementById("filtrar").addEventListener("keyup", filtro);
+    </script>
+
+
+{% endblock %}

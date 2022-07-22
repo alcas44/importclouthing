@@ -5,68 +5,52 @@
 
 <div class="card-box mb-30">
     <div class="pd-30">
-        <h4 class="text-info h4">Reporte Ventas de Cliente <strong class="text-danger"> {{ver.negocio}} </strong></h4>
-        <input type="text" class="form-control" id="filtrar" placeholder="Filtrar Por # Venta" name="f" autofocus="f" />
+        <h4 class="text-info h4">Reporte Ventas de Cliente <br><strong class="text-danger"> {{ver.negocio}} </strong>
+        <br>Total de Compras <strong class="text-danger">Q.{{total.tot}}</strong>
+        </h4>
     </div>
     
-    <div class="pd-20 card-box mb-30">
-        <div class="row">
-            <table class="table">
-                <caption>List of users</caption>
-                <thead>
-                  <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">First</th>
-                    <th scope="col">Last</th>
-                    <th scope="col">Handle</th>
-                    <th scope="col">Handle</th>
-                    <th scope="col">Handle</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                    <td>@mdo</td>
-                    <td>@mdo</td>
-                  </tr>
-                </tbody>
-            </table>  
-        </div>
+    <div class="pd-20">
+    
+      <table class="table table-hover">
+        <thead align="center">
+          <tr>
+            <th scope="col">Tipo de Venta</th>
+            <th scope="col">Cantidad de Veces</th>
+            <th scope="col">Ver</th>
+          </tr>
+        </thead>
+        <tbody align="center">
+          <tr>
+            <td>1</td>
+            <td>Compras en Efectivo</td>
+            <td><a class="badge bg-primary text-white" href="{% url 'RE' n %}">{{te}}</a></td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Compras Con Cheque</td>
+            <td><a class="badge bg-primary text-white" href="{% url 'RC' n %}">{{tc}}</a></td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>Compras con Tarjeta Debito/Credito</td>
+            <td><a class="badge bg-primary text-white" href="{% url 'RT' n %}">{{tt}}</a></td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td>Compras con Depositos Bancarios</td>
+            <td><a class="badge bg-primary text-white" href="{% url 'RD' n %}">{{td}}</a></td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td>Compras con Notas de Credito</td>
+            <td><a class="badge bg-primary text-white" href="{% url 'RNC' n %}">{{nc}}</a></td>
+          </tr>
+        </tbody>
+      </table>
 
-        
 
     </div>
-
-
-
-<script>
-    function filtro() {
-      // Accede al texto de entrada y a varios elementos del DOM
-      let valor = document.getElementById("filtrar").value.toUpperCase();
-      let nombres = document.getElementById("nombres");
-      let filas = nombres.getElementsByTagName("tr");
-    
-      // Iteramos el arreglo de filas
-      for(let i = 0; i < filas.length; i++){
-        // Por cada fila se obtiene la referencia a la columna venta
-        let columnaLenguaje = filas[i].getElementsByTagName("td")[0];
-        console.log(columnaLenguaje);
-        // Se extrae el texto de la columna referencia
-        let lenguaje = columnaLenguaje.textContent;
-        // Se muestra u oculta la fila si la entrada de texto
-        // coincide con el texto de la columna lenguaje
-        filas[i].style.display = lenguaje.toUpperCase().indexOf(valor) > -1 ? "" : "none";
-      }
-    }
-    
-    // Se agrega un escuchador de eventos a la entrada de texto
-    // para activar la función de filtrado cada vez que el usuario
-    // ingresa texto en la entrada
-    document.getElementById("filtrar").addEventListener("keyup", filtro);
-    </script>
 
 
 {% endblock %}
