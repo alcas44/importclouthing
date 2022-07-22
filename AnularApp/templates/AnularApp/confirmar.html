@@ -1,0 +1,95 @@
+{% extends 'BaseApp/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="card-box mb-30">
+
+    <div class="pd-30">
+        <h4 align="center" class="text-info h4">Confirmacion de Datos Para Anulacion de Venta</h4>
+    </div>
+
+    
+<div class="pd-20 card-box mb-30">
+    <form action="" method="POST">{% csrf_token %}
+        
+        <div class="row">
+            
+            <div class="col-md-3 col-sm-12">
+                <div class="form-group">
+                    <label># de Venta</label>
+                    <input class="form-control" readonly value="{{vt}}" name="venta" type="text">
+                </div>                          
+            </div>
+            {% for v in v %}
+            <div class="col-md-3 col-sm-12">
+                <div class="form-group">
+                    <label>Cliente</label>
+                    <input class="form-control" readonly value="{{v.negocio}}" name="cliente" type="text">
+                </div>                          
+            </div>
+            {% endfor %}
+            {% for n in n %}
+            <div class="col-md-3 col-sm-12">
+                <div class="form-group">
+                    <label>Fecha de Venta</label>
+                    <input class="form-control" readonly value="{{n.fecha_venta}}" name="fecha" type="text">
+                </div>                          
+            </div>
+            <div class="col-md-3 col-sm-12">
+                <div class="form-group">
+                    <label>Total Venta</label>
+                    <input class="form-control" readonly value="{{t.tot}}" name="total" type="text">
+                </div>                          
+            </div>
+            {% endfor %}
+        </div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12">
+                <div class="form-group">
+                    <label>Motivo de la Anulacion</label>
+                    <input class="form-control" maxlength="850" required name="motivo" type="text" placeholder="Motivo de la Anulacion" autofocus="motivo">
+                </div>                          
+            </div>
+        </div>
+
+        <br>
+        <h6 class="text-danger" align="left">Detalle de la Venta</h6>
+        <br>
+
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col"># Venta</th>
+            <th scope="col">Codigo Articulo</th>
+            <th scope="col">Precio Unitario</th>
+            <th scope="col">Cantidad</th>
+            <th scope="col">Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for d in d %}
+          <tr>
+            <th scope="row"><input type="text" class="form-control" name="vent" readonly value="{{d.venta}}"></th>
+            <td><input type="text" class="form-control" name="cd" readonly value="{{d.codigo}}"></td>
+            <td><input type="text" class="form-control" name="pr" readonly value="{{d.precio}}"></td>
+            <td><input type="number" class="form-control" name="cn" readonly value="{{d.cantidad}}"></td>
+            <td><input type="text" class="form-control" name="tt" readonly value="{{d.total}}"></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+        
+
+        <div class="container" align="center">
+            <button type="submit" class="btn btn-primary">Anular</button>
+            <a type="button" class="btn btn-danger" href="{% url 'AnularVenta' %}">Cancelar</a>
+        </div>
+
+    </form>
+</div>
+
+
+</div>    
+{% endblock %}
