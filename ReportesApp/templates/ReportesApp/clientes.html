@@ -5,54 +5,44 @@
 
 <div class="card-box mb-30">
     <div class="pd-30">
-        <h4 class="text-info h4">Inventario de Clientes</h4>
+        <h4 class="text-info h4">Reporte Ventas de Cliente <strong class="text-danger"> {{ver.negocio}} </strong></h4>
         <input type="text" class="form-control" id="filtrar" placeholder="Filtrar Por # Venta" name="f" autofocus="f" />
     </div>
-    <div class="pb-20">
-        <table class="data-table table stripe hover nowrap table-responsive-lg">
-            <thead>
-                <tr>
-                    <th># Venta</th>
-                    <th>Negocio</th>
-                    <th>Fecha Compra</th>
-                    <th>Estado</th>
-                    <th class="datatable-nosort">Accion</th>
-                </tr>
-            </thead>
-            <tbody id="nombres">
-                {% for v in vc %}
-                <tr>
-                    <td>{{ v.venta }}</td>
-                    <td>{{ ver.negocio }}</td>
-                    <td>{{v.fecha_venta}}</td>
-                    {% if v.estado == 1 %}
-                    <td>Hecha</td>
-                    {% elif v.estado == 0 %}
-                    <td>Pendiente</td>
-                    {% else %}
-                    <td>Venta Anulada</td>
-                    {% endif %}
-                    <td>
-                        <div class="dropdown">
-                            <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
-                                <i class="dw dw-more"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-                                <a class="dropdown-item" href="#"><i class="dw dw-eye"></i> Ver</a>
-                                <a class="dropdown-item" href="#"><i class="dw dw-eye"></i>Reporte Ventas</a>
-                                <a class="dropdown-item" href="#"><i class="dw dw-edit2"></i> Editar</a>
-                                <a class="dropdown-item" href="#"><i class="dw dw-delete-3"></i> Borrar</a>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
-</div>
+    
+    <div class="pd-20 card-box mb-30">
+        <div class="row">
+            <table class="table">
+                <caption>List of users</caption>
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">First</th>
+                    <th scope="col">Last</th>
+                    <th scope="col">Handle</th>
+                    <th scope="col">Handle</th>
+                    <th scope="col">Handle</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">1</th>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                    <td>@mdo</td>
+                    <td>@mdo</td>
+                  </tr>
+                </tbody>
+            </table>  
+        </div>
 
-<script >
+        
+
+    </div>
+
+
+
+<script>
     function filtro() {
       // Accede al texto de entrada y a varios elementos del DOM
       let valor = document.getElementById("filtrar").value.toUpperCase();

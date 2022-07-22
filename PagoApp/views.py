@@ -208,7 +208,7 @@ def notacredito(request,v,vn,n,t,tp):
             pc.tipo_pago = request.POST["tipo"]
             pc.numero_credito = request.POST["nota"]
             pc.fecha_inicio = request.POST["inicio"]
-            pc.fecha_fin = request.POST["fin"].strftime("%d-%m-%Y")
+            pc.fecha_fin = request.POST["fin"]
             pc.total_venta = request.POST["total"] 
             pc.verificador = v
             pc.observaciones = request.POST["obs"]
