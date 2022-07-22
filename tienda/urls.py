@@ -30,6 +30,7 @@ urlpatterns = [
     path('venta/',include("VentaApp.urls")),
     path('reportes/',include("ReportesApp.urls")),
     path('pago/',include("PagoApp.urls")),
+    path('anular/',include("AnularApp.urls")),
     #Urls Asesores de Ventas
     path('asesor/',include("InicioAsesor.urls")),
 ]

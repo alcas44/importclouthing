@@ -1,0 +1,77 @@
+{% extends 'BaseApp/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="card-box mb-30">
+
+    <div class="pd-30">
+        <h4 class="text-info h4">Anulacion de Venta</h4>
+        <input type="text" class="form-control" id="filtrar" placeholder="Filtrar Por Venta" name="f" autofocus="f" />
+    </div>
+    {% if messages %}
+          <ul class="messages">
+          {% for message in messages %}
+          <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong>{{message}}</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          {% endfor %}
+    {% endif %}
+
+    <table class="table table-hover">
+        <thead>
+          <tr align="center">
+            <th scope="col"># Venta</th>
+            <th scope="col">Cliente</th>
+            <th scope="col">Fecha Venta</th>
+            <th scope="col">Accion</th>
+          </tr>
+        </thead>
+        <tbody id="nombres">
+            {% for v in v %}
+          <tr align="center">
+            <td scope="row">{{v.venta}}</td>
+            <td>{{v.nit.negocio}}</td>
+            <td>{{v.fecha_venta}}</td>
+            <td><a class="badge bg-danger text-white" href="#">Anular</a></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+
+
+</div>
+
+
+<script >
+    function filtro() {
+      // Accede al texto de entrada y a varios elementos del DOM
+      let valor = document.getElementById("filtrar").value.toUpperCase();
+      let nombres = document.getElementById("nombres");
+      let filas = nombres.getElementsByTagName("tr");
+    
+      // Iteramos el arreglo de filas
+      for(let i = 0; i < filas.length; i++){
+        // Por cada fila se obtiene la referencia a la columna negocio
+        let columnaLenguaje = filas[i].getElementsByTagName("td")[0];
+        console.log(columnaLenguaje);
+        // Se extrae el texto de la columna referencia
+        let lenguaje = columnaLenguaje.textContent;
+        // Se muestra u oculta la fila si la entrada de texto
+        // coincide con el texto de la columna lenguaje
+        filas[i].style.display = lenguaje.toUpperCase().indexOf(valor) > -1 ? "" : "none";
+      }
+    }
+    
+    // Se agrega un escuchador de eventos a la entrada de texto
+    // para activar la función de filtrado cada vez que el usuario
+    // ingresa texto en la entrada
+    document.getElementById("filtrar").addEventListener("keyup", filtro);
+</script>
+
+
+{% endblock %}
